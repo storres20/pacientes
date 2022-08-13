@@ -1,0 +1,66 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 20vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  /* background-color: #282c34; */
+  /* background-color: #FFFFFF; */
+  background: rgb(63,94,251);
+  background: linear-gradient(90deg, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+  
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content:flex-start;
+  font-size: calc(10px + 2vmin);
+  color: black;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.FormLabel{
+  font-size: 20px;
+}
+
+.FormLabelMuted{
+  font-size: 16px;
+}
+
+.FormCheck{
+  font-size: 14px;
+}
+
+.LoginCard{
+  width: 400px;
+}
+
+
+/* Teléfonos */
+@media only screen and (max-width: 575px){
+  .App-header > h1 {
+    text-align: center;
+  }
+}

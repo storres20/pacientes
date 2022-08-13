@@ -1,0 +1,17 @@
+.link {
+  text-decoration: none;
+  color: gray;
+  margin: 0 20px;
+}
+
+.link:hover {
+  color: black;
+}
+
+
+/* Teléfonos */
+@media only screen and (max-width: 575px){
+  .link {
+    margin: 10px 0;
+  }
+}
