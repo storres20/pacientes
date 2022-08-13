@@ -7,7 +7,7 @@ import ProductDataService from "../../services/ProductService"
 import {Link} from 'react-router-dom'
 
 import './Home.scss'
-import './Loading.scss'
+//import './Loading.scss'
 
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
@@ -27,7 +27,6 @@ function Home({ logout }) {
   const [rutas, setRutas] = useState([]);
   const [allData, setAllData] = useState([]);
   const [categorias, setCategorias] = useState([]); // list category
-  const [balance, setBalance] = useState([]); // Total balance: $100
   const [loading, setLoading] = useState(false) // loading
   
   // pagination
@@ -49,22 +48,6 @@ function Home({ logout }) {
         let suma=0
         let datos = res.data
         
-        //Total balance
-        datos.map(item => {
-          //console.log(item.monto)
-          //(item.tipo === 'in') ? (suma = suma + item.monto) : (suma = suma - item.monto)
-          //return suma
-          
-          if (item.tipo === 'in') {
-            suma = suma + (item.monto)
-          }
-          else if (item.tipo === 'out') {
-            suma = suma - (item.monto)
-          }
-          return suma
-          });
-          
-        setBalance(suma)
         setLoading(true) // loading
         
       })
@@ -96,7 +79,7 @@ function Home({ logout }) {
         // Use the toLowerCase() method to make it case-insensitive
       });
 
-      inputRef2.current.value = "--All--";
+      inputRef2.current.value = "--Todos--";
       setRutas(results);
       setCurrentPage(1)
 
@@ -146,7 +129,7 @@ function Home({ logout }) {
   // button delete
   const deleteProduct2 = (id) => {
   
-    if (window.confirm("Do you want to DELETE ?") === true) {
+    if (window.confirm("Desea ELIMINAR el paciente ?") === true) {
       ProductDataService.remove(id)
       .then(response => {
         //console.log(response.data);
@@ -160,22 +143,21 @@ function Home({ logout }) {
   };
 
   return (
-    <div>
+    <div style={{height: '100vh'}}  className='bgDiv'>
       <NavBar logout={logout} />
 
-      <Card>
+      <Card className='bgDiv'>
         <Card.Body>
-          <Card.Title><h1>Home</h1></Card.Title>
+          <Card.Title><h1>Bienvenido</h1></Card.Title>
           <Card.Text>
-          This Home page shows all your financial incomes and outcomes.
-          Even, you can search by name or order by category.
+          Este sistema le permite visualizar el listado de pacientes
           </Card.Text>
 
-          <Card.Title>Financial List:</Card.Title>
+          <Card.Title>Listado:</Card.Title>
           
           <InputGroup className="mt-3 mb-3">
-            <InputGroup.Text id="basic-addon1">Total balance:</InputGroup.Text>
-            <Form.Label className={`label ${(balance<0) ? 'text-danger' : ''}`}><span>$ {balance}</span></Form.Label>
+            <InputGroup.Text id="basic-addon1">Total de pacientes:</InputGroup.Text>
+            <Form.Label className="label"><span>{allData.length}</span></Form.Label>
           </InputGroup>
 
 
@@ -184,10 +166,10 @@ function Home({ logout }) {
               <Row className='flexCol'>
                 <Col>
                   <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                    <Form.Label>Search:</Form.Label>
+                    <Form.Label>Busqueda:</Form.Label>
                     <Form.Control
-                      placeholder="Enter concept"
-                      aria-label="Enter concept"
+                      placeholder="Ingresar nombre"
+                      aria-label="Ingresar nombre"
                       aria-describedby="basic-addon2"
                       className='inputLar'
                       autoComplete="off"
@@ -199,9 +181,9 @@ function Home({ logout }) {
 
                 <Col>
                   <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                    <Form.Label>Category:</Form.Label>
+                    <Form.Label>Categoria:</Form.Label>
                     <Form.Select aria-label="Floating label select example" onChange={event => handleCategory(event)} ref={inputRef2}>
-                      <option>--All--</option>
+                      <option>--Todos--</option>
                       {
                         categorias.map(item => (
                           <option key={item.id} value={item.nombre}>{item.nombre}</option>
@@ -216,12 +198,12 @@ function Home({ logout }) {
           </Form>
           
           {/* "New" button */}
-          <Link to={"/new"}><Button variant="primary"><i className="bi bi-plus-circle"></i> New</Button></Link>
+          <Link to={"/new"}><Button variant="primary"><i className="bi bi-plus-circle"></i> Nuevo</Button></Link>
           
           {loading ? (
           
             <Card>
-              <Card.Body>
+              <Card.Body  className='bgDiv'>
               
                 <Pagina postsPerPage={postsPerPage} totalPosts={rutas.length} paginate={paginate} currentPage={currentPage} />
     
@@ -229,12 +211,12 @@ function Home({ logout }) {
                   <thead>
                     <tr>
                       <th className='text-center'>N°</th>
-                      <th>Concept</th>
-                      <th className='text-center'>Amount</th>
-                      <th className='text-center'>Date</th>
-                      <th className='text-center'>Type</th>
-                      <th className='text-center'>Category</th>
-                      <th className='text-center'>Action</th>
+                      <th>Nombre</th>
+                      <th className='text-center'>DNI</th>
+                      <th className='text-center'>Fecha Nacimiento</th>
+                      <th className='text-center'>Sexo</th>
+                      <th className='text-center'>Categoria</th>
+                      <th className='text-center'>Accion</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -242,7 +224,7 @@ function Home({ logout }) {
                       <tr key={item.id}>
                         <td className='text-center'>{index+1}</td>
                         <td>{item.concepto}</td>
-                        <td className='text-center'>$ {item.monto}</td>
+                        <td className='text-center'>{item.monto}</td>
                         <td className='text-center'>{item.fecha2}</td>
                         <td className='text-center'>{item.tipo}</td>
                         <td className='text-center'>{item.categoria}</td>
@@ -250,11 +232,14 @@ function Home({ logout }) {
                           <Link
                             className='btn btn-warning m-1'
                             to={`/edit/${item.id}`}
+                            title='editar'
                           >
                             <i className="bi bi-pencil-fill"></i>
                           </Link>
                           <button className="btn btn-danger ml-2"
-                          onClick={() => deleteProduct2(`${item.id}`)}>
+                          onClick={() => deleteProduct2(`${item.id}`)}
+                          title='borrar'
+                          >
                             <i className="bi bi-trash-fill"></i>
                           </button>
                         </td>
@@ -272,7 +257,7 @@ function Home({ logout }) {
           
           ) : (
           
-            <div className="flexLoad">
+            <div className="flexLoad" >
               <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
             </div>
           
