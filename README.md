@@ -1,6 +1,6 @@
 
-<h1 align="center">AlkemyFS</h1>
-<p align="center"><img src="https://user-images.githubusercontent.com/81504385/179873080-0e84d9d0-4712-4ff1-9473-5de3764f2b75.png"/></p> 
+<h1 align="center">Pacientes</h1>
+<p align="center"><img src="https://user-images.githubusercontent.com/81504385/184515974-91438e6c-21ba-45d3-92cd-5b79fa3916ee.png"/></p> 
 
 
 ## Tabla de contenidos:
