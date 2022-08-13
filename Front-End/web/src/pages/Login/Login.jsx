@@ -3,7 +3,7 @@ import React, {useState} from 'react'
 
 import logo from './logo.svg'
 import './Login.scss'
-import './Loading.scss' // loading
+//import './Loading.scss' // loading
 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -49,7 +49,8 @@ function Login({authenticate}) {
     <div>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <h1>Welcome to your Personal Financial App.</h1>
+        <h1>Bienvenido</h1>
+        <h2>Sistema de Registro de Pacientes</h2>
         
         {loading ? (
           <Card className="LoginCard mt-5">
@@ -57,16 +58,16 @@ function Login({authenticate}) {
               
                 <Form>
                   <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label className="FormLabel">Username</Form.Label>
+                    <Form.Label className="FormLabel">Nombre</Form.Label>
                     <Form.Control type="text" placeholder="Enter: mario" value={body.username} onChange={inputChange} name="username" />
                   </Form.Group>
             
                   <Form.Group className="mb-5" controlId="formBasicPassword">
-                    <Form.Label className="FormLabel">Password</Form.Label>
+                    <Form.Label className="FormLabel">Contraseña</Form.Label>
                     <Form.Control type="password" placeholder="Enter: mario123" value={body.password} onChange={inputChange} name="password" />
                   </Form.Group>
                   
-                  <Button variant="primary" onClick={onSubmit} >
+                  <Button variant="danger" onClick={onSubmit} >
                     Login
                   </Button>
                 </Form>
