@@ -117,135 +117,131 @@ function New({logout}) {
   
 
   return (
-    <div>
+    <div className='bgDiv' style={{height: '100vh'}}>
       <NavBar logout={logout} />
       
-      <Card>
-        <Card.Body className="flex1">
-          <Card.Title><h1>New</h1></Card.Title>
-          <Card.Text>
-            Feel free to add your financial incomes or outcomes.
-          </Card.Text>
-          
-          <div className="submit-form">
-            <div className='formFlex'>
-              <h4>New Product</h4>
-              <div className="form-group mb-3">
-                <label htmlFor="concepto">Concept</label>
-                <input
-                  type="text"
-                  className="form-control input"
-                  id="concepto"
-                  required={true}
-                  value={product.concepto}
-                  onChange={handleInputChange}
-                  name="concepto"
-                  autoComplete='off'
-                />
-              </div>
-    
-              <div className="form-group mb-3">
-                <label htmlFor="monto">Amount</label>
-                <input
-                  type="text"
-                  className="form-control input"
-                  id="monto"
-                  required={true}
-                  value={product.monto}
-                  onChange={handleInputChange}
-                  name="monto"
-                  autoComplete='off'
-                />
-              </div>
-              
-              {/* <div className="form-group mb-3">
-                <label htmlFor="fecha">Date</label>
-                <input
-                  type="text"
-                  className="form-control input"
-                  id="fecha"
-                  required={true}
-                  value={product.fecha}
-                  onChange={handleInputChange}
-                  name="fecha"
-                  autoComplete='off'
-                />
-              </div> */}
-              
-              {/* onChange={(date) => setStartDate(date)} */}
-              
-              <div className="form-group mb-3">
-                <label htmlFor="fecha">Date</label>
-                <DatePicker
-                  className="form-control input"
-                  dateFormat="dd/MM/yyyy"
-                  selected={startDate}
-                  placeholderText="Click to select a date"
-                  
-                  id="fecha"
-                  required={true}
-                  value={startDate}
-                  onChange={date => handleOnChangeDate(date)}
-                  onCalendarClose={handleInputChangeDate}
-                  name="fecha"
-                  autoComplete='off'
-                />
-              </div>
-              
-              
-              <div className="form-group mb-3">
-                <label htmlFor="tipo">Type</label>
-                <select className="form-select input" aria-label="Default select example"
-                  id="tipo"
-                  required={true}
-                  value={product.tipo}
-                  onChange={handleInputChange}
-                  name="tipo"
-                >
-                  <option>--Select Type--</option>
-                  <option value="in">in</option>
-                  <option value="out">out</option>
-                </select>
-              </div>
-              
-              
-              <div className="form-group mb-3">
-                <label htmlFor="categoria">Category</label>
-                <select className="form-select input" aria-label="Default select example"
-                  id="categoria"
-                  required={true}
-                  value={product.categoria}
-                  onChange={handleInputChange}
-                  name="categoria"
-                >
-                  <option>--Select Category--</option>
-                  {
-                    categorias.map(item => (
-                      <option key={item.id} value={item.nombre}>{item.nombre}</option>
-                    ))
-                  }
-                </select>
-              </div>
-              
-              <div>
-                <button onClick={saveProduct} className="btn btn-primary mt-3">
-                  Submit
-                </button>
-                <Link
-                  to={"/home"}
-                  className="btn btn-danger mt-3"
-                >
-                  Go Back
-                </Link>
-              </div>
+      <div className="flex1">
+        <h1>Nuevo</h1>
+        <h6>
+          Registrar datos del nuevo paciente.
+        </h6>
+        
+        <div className="submit-form">
+          <div className='formFlex'>
+            <h4>Nuevo Paciente</h4>
+            <div className="form-group mb-3">
+              <label htmlFor="concepto">Nombre</label>
+              <input
+                type="text"
+                className="form-control input"
+                id="concepto"
+                required={true}
+                value={product.concepto}
+                onChange={handleInputChange}
+                name="concepto"
+                autoComplete='off'
+              />
             </div>
-      
+  
+            <div className="form-group mb-3">
+              <label htmlFor="monto">DNI</label>
+              <input
+                type="text"
+                className="form-control input"
+                id="monto"
+                required={true}
+                value={product.monto}
+                onChange={handleInputChange}
+                name="monto"
+                autoComplete='off'
+              />
+            </div>
+            
+            {/* <div className="form-group mb-3">
+              <label htmlFor="fecha">Date</label>
+              <input
+                type="text"
+                className="form-control input"
+                id="fecha"
+                required={true}
+                value={product.fecha}
+                onChange={handleInputChange}
+                name="fecha"
+                autoComplete='off'
+              />
+            </div> */}
+            
+            {/* onChange={(date) => setStartDate(date)} */}
+            
+            <div className="form-group mb-3">
+              <label htmlFor="fecha">Fecha Nacimiento</label>
+              <DatePicker
+                className="form-control input"
+                dateFormat="dd/MM/yyyy"
+                selected={startDate}
+                placeholderText="--Seleccionar--"
+                
+                id="fecha"
+                required={true}
+                value={startDate}
+                onChange={date => handleOnChangeDate(date)}
+                onCalendarClose={handleInputChangeDate}
+                name="fecha"
+                autoComplete='off'
+              />
+            </div>
+            
+            
+            <div className="form-group mb-3">
+              <label htmlFor="tipo">Sexo</label>
+              <select className="form-select input" aria-label="Default select example"
+                id="tipo"
+                required={true}
+                value={product.tipo}
+                onChange={handleInputChange}
+                name="tipo"
+              >
+                <option>--Seleccionar--</option>
+                <option value="masculino">masculino</option>
+                <option value="femenino">femenino</option>
+              </select>
+            </div>
+            
+            
+            <div className="form-group mb-3">
+              <label htmlFor="categoria">Categoria</label>
+              <select className="form-select input" aria-label="Default select example"
+                id="categoria"
+                required={true}
+                value={product.categoria}
+                onChange={handleInputChange}
+                name="categoria"
+              >
+                <option>--Seleccionar--</option>
+                {
+                  categorias.map(item => (
+                    <option key={item.id} value={item.nombre}>{item.nombre}</option>
+                  ))
+                }
+              </select>
+            </div>
+            
+            <div>
+              <button onClick={saveProduct} className="btn btn-primary mt-3">
+                Registrar
+              </button>
+              <Link
+                to={"/home"}
+                className="btn btn-danger mt-3"
+              >
+                Atras
+              </Link>
+            </div>
           </div>
-          
-        </Card.Body>
-      </Card>
-      
-      
+    
+        </div>
+        
+      </div>
       
     </div>
   )
