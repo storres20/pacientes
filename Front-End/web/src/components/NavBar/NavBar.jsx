@@ -12,7 +12,7 @@ import logo from './logorb.svg'
 function NavBar({logout}) {
   return (
     <div>
-      <Navbar bg="light" expand="md">
+      <Navbar bg="dark" variant="dark" expand="md">
         <Container fluid>
           <Navbar.Brand>
           <img
@@ -31,7 +31,7 @@ function NavBar({logout}) {
               navbarScroll
             >
               <Link to="/home" className='link'>Home</Link>
-              <Link to="/about" className='link'>About</Link>
+              {/* <Link to="/about" className='link'>About</Link> */}
               
             </Nav>
             
