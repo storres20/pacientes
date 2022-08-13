@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react'
 import NavBar from '../../components/NavBar/NavBar'
-import Card from 'react-bootstrap/Card';
 
 import {Link, useParams, useNavigate} from 'react-router-dom'
 

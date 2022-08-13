@@ -45,9 +45,6 @@ function Home({ logout }) {
         setRutas(res.data)
         setAllData(res.data)
         
-        let suma=0
-        let datos = res.data
-        
         setLoading(true) // loading
         
       })
