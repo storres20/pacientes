@@ -14,11 +14,9 @@
 ## Descripción y contexto
 ---
 
-🛍 🛒 **AlkmeyFS** 🛍 🛒 es una website que permite registrar los ingresos y egresos de dinero. 🛒🛒🛒
+🛍 🛒 **Pacientes** 🛍 🛒 es una website que permite registrar los datos de nuevos pacientes y a la vez editarlos. 🛒🛒🛒
 
-Es una web application, enfocada para las personas; con la finalidad de brindarles una herramienta que facilite un mayor control de las compras o gastos (egresos) y las ventas (ingresos).
-
-Además, permite agregar nuevos ingresos o egresos de dinero.
+Es una web application, enfocada para la recepcion de una Clinica o Centro de Salud; con la finalidad de brindarles una herramienta que facilite un mayor control de los pacientes.
 
 Constará con vista para celulares y para computadoras de escritorio.
 
@@ -26,9 +24,9 @@ Puede ser accedido a traves de: <a href="https://alkemy20-front.netlify.app/" ta
 
 ## Guía de usuario
 ---
-Elaborada para mostrar catalogo de productos, titulo, descripcion. Presenta la opcion de CRUD para agregar nuevos productos
+Presenta la opcion de CRUD para agregar nuevos pacientes y editarlos
 
-![image](https://user-images.githubusercontent.com/81504385/179873181-85a48aec-2b44-4982-a2c9-d50f22659b03.png)
+![image](https://user-images.githubusercontent.com/81504385/184516037-eaade66b-cac4-4097-a0bc-1058e8d068e1.png)
 
 
 ## Información adicional
