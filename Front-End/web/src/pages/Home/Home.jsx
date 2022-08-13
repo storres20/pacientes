@@ -92,7 +92,7 @@ function Home({ logout }) {
   const handleCategory = (event) => {
     const keyword = event.target.value;
 
-    if (keyword !== '--All--') {
+    if (keyword !== '--Todos--') {
       const results = allData.filter((user) => {
         //return user.title.toLowerCase().startsWith(keyword.toLowerCase());
         return user.categoria.toLowerCase().includes(keyword.toLowerCase());
