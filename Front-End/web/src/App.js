@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "bootstrap-icons/font/bootstrap-icons.css";
 
+import './Loading.scss'
+
 import Login from "./pages/Login/Login";
 import Home from "./pages/Home/Home"
 import About from './pages/About/About';
