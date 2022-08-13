@@ -11,7 +11,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 import './Edit.scss'
-import './Loading.scss'
+//import './Loading.scss'
 
 import axios from 'axios'
 
@@ -121,122 +121,130 @@ function Edit({logout}) {
   
 
   return (
-    <div>
+    <div className='bgDiv' style={{height: '100vh'}}>
       <NavBar logout={logout} />
       
-      <Card>
-        <Card.Body className="flex1">
-          <Card.Title><h1>Edit</h1></Card.Title>
-          <Card.Text>
-            Feel free to edit your financial incomes or outcomes.
-          </Card.Text>
-          
-          {loading ? (
-            <div>
+      <div className="flex1">
+        <h1>Editar</h1>
+        <h6>
+          Editar datos del paciente.
+        </h6>
+        
+        {loading ? (
+          <div>
+            
+            <div className="edit-form">
+              <h4>Editar Paciente</h4>
+              <form>
+                <div className="form-group mb-3">
+                  <label htmlFor="concepto">Nombre</label>
+                  <input
+                    type="text"
+                    className="form-control input"
+                    id="concepto"
+                    name="concepto"
+                    value={currentProduct.concepto}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                
+                <div className="form-group mb-3">
+                  <label htmlFor="monto">DNI</label>
+                  <input
+                    type="text"
+                    className="form-control input"
+                    id="monto"
+                    name="monto"
+                    value={currentProduct.monto}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                
+                <div className="form-group mb-3">
+                  <label htmlFor="fecha">Fecha Nacimiento</label>
+                  <DatePicker
+                    className="form-control input"
+                    dateFormat="dd/MM/yyyy"
+                    selected={currentProduct.fecha}
+                    
+                    id="fecha"
+                    required={true}
+                    value={currentProduct.fecha}
+                    onChange={date => handleOnChangeDate(date)}
+                    onCalendarClose={handleInputChangeDate}
+                    name="fecha"
+                    autoComplete='off'
+                  />
+                </div>
+                
+                <div className="form-group mb-3">
+                  <label htmlFor="tipo">Sexo</label>
+                  {/* <input
+                    type="text"
+                    className="form-control input"
+                    id="tipo"
+                    name="tipo"
+                    value={currentProduct.tipo}
+                    onChange={handleInputChange}
+                  /> */}
+                  <select className="form-select input" aria-label="Default select example"
+                    id="tipo"
+                    required={true}
+                    value={currentProduct.tipo}
+                    onChange={handleInputChange}
+                    name="tipo"
+                  >
+                    {/* <option>--Seleccionar--</option> */}
+                    <option value="masculino">masculino</option>
+                    <option value="femenino">femenino</option>
+                  </select>
+                </div>
+                
+                <div className="form-group mb-3">
+                  <label htmlFor="categoria">Categoria</label>
+                  <select className="form-select input" aria-label="Default select example"
+                    id="categoria"
+                    required={true}
+                    value={currentProduct.categoria}
+                    onChange={handleInputChange}
+                    name="categoria"
+                  >
+                    {/* <option>--Seleccionar--</option> */}
+                    {
+                      categorias.map(item => (
+                        <option key={item.id} value={item.nombre}>{item.nombre}</option>
+                      ))
+                    }
+                  </select>
+                </div>
+    
+              </form>
+    
+    
+              <button
+                type="submit"
+                className="btn btn-primary mt-3"
+                onClick={updateProduct}
+              >
+                Actualizar
+              </button>
               
-              <div className="edit-form">
-                <h4>Edit Product</h4>
-                <form>
-                  <div className="form-group mb-3">
-                    <label htmlFor="concepto">Concept</label>
-                    <input
-                      type="text"
-                      className="form-control input"
-                      id="concepto"
-                      name="concepto"
-                      value={currentProduct.concepto}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                  
-                  <div className="form-group mb-3">
-                    <label htmlFor="monto">Amount</label>
-                    <input
-                      type="text"
-                      className="form-control input"
-                      id="monto"
-                      name="monto"
-                      value={currentProduct.monto}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                  
-                  <div className="form-group mb-3">
-                    <label htmlFor="fecha">Date</label>
-                    <DatePicker
-                      className="form-control input"
-                      dateFormat="dd/MM/yyyy"
-                      selected={currentProduct.fecha}
-                      
-                      id="fecha"
-                      required={true}
-                      value={currentProduct.fecha}
-                      onChange={date => handleOnChangeDate(date)}
-                      onCalendarClose={handleInputChangeDate}
-                      name="fecha"
-                      autoComplete='off'
-                    />
-                  </div>
-                  
-                  <div className="form-group mb-3">
-                    <label htmlFor="tipo">Type</label>
-                    <input
-                      type="text"
-                      className="form-control input"
-                      id="tipo"
-                      name="tipo"
-                      value={currentProduct.tipo}
-                      onChange={handleInputChange}
-                      disabled
-                    />
-                  </div>
-                  
-                  <div className="form-group mb-3">
-                    <label htmlFor="categoria">Category</label>
-                    <select className="form-select input" aria-label="Default select example"
-                      id="categoria"
-                      required={true}
-                      value={currentProduct.categoria}
-                      onChange={handleInputChange}
-                      name="categoria"
-                    >
-                      <option>--Select Category--</option>
-                      {
-                        categorias.map(item => (
-                          <option key={item.id} value={item.nombre}>{item.nombre}</option>
-                        ))
-                      }
-                    </select>
-                  </div>
-      
-                </form>
-      
-      
-                <button
-                  type="submit"
-                  className="btn btn-primary mt-3"
-                  onClick={updateProduct}
-                >
-                  Update
-                </button>
-                
-                <Link
-                  to={"/home"}
-                  className="btn btn-danger mt-3"
-                >
-                  Go Back
-                </Link>
-                
-              </div>
+              <Link
+                to={"/home"}
+                className="btn btn-danger mt-3"
+              >
+                Atras
+              </Link>
+              
             </div>
-          ) : (
-            <div className="flexLoad">
-              <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
-            </div>
-          )}
-          
-          </Card.Body>
-      </Card>
+          </div>
+        ) : (
+          <div className="flexLoad">
+            <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
+          </div>
+        )}
+        
+      </div>
     
     </div>
   )
