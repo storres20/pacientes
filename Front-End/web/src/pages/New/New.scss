@@ -1,4 +1,11 @@
+.bgDiv {
+  background: rgb(238,174,202);
+  background: linear-gradient(90deg, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+}
 
+.flex1 {
+  padding: 16px;
+}
 
 /* Escritorio grande */
 @media only screen and (min-width: 768px){
