@@ -5,8 +5,8 @@ const sql = require("./app/models/db.js");
 const app = express();
 
 var corsOptions = {
-  origin: "http://localhost:3000" //frontend
-  //origin: "https://alkemy20-front.netlify.app" //frontend
+  //origin: "http://localhost:3000" //frontend
+  origin: "https://pacientes20.netlify.app" //frontend
 };
 
 
@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true })); /* bodyParser.urlencoded() is d
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to Alkemy Back-End application." });
+  res.json({ message: "Welcome to Pacientes Back-End application." });
 });
 
 app.post("/login", (req, res) => {
