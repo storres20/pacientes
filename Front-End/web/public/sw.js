@@ -1,6 +1,6 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable no-restricted-globals */
-const CACHE_NAME = 'Rutas20';
+const CACHE_NAME = 'Pacientes';
 const urlsToCache = [
   './favicon.ico',
   './logo192.png'
