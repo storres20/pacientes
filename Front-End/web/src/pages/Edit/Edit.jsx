@@ -148,6 +148,7 @@ function Edit({logout}) {
                     name="concepto"
                     value={currentProduct.concepto}
                     onChange={handleInputChange}
+                    autoComplete='off'
                   />
                 </div>
                 
@@ -160,6 +161,7 @@ function Edit({logout}) {
                     name="monto"
                     value={currentProduct.monto}
                     onChange={handleInputChange}
+                    autoComplete='off'
                   />
                 </div>
                 
