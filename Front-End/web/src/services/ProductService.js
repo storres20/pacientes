@@ -4,12 +4,20 @@ const getAll = () => {
   return http.get("/products");
 };
 
+const getAll2 = () => {
+  return http.get("/categories");
+};
+
 const get = id => {
   return http.get(`/products/${id}`);
 };
 
 const create = data => {
   return http.post("/products", data);
+};
+
+const create3 = data => {
+  return http.post("/login", data);
 };
 
 const update = (id, data) => {
@@ -31,8 +39,10 @@ const findByTitle = title => {
 // 👇️ assign to variable
 const ProductDataService = {
   getAll,
+  getAll2,
   get,
   create,
+  create3,
   update,
   remove,
   removeAll,
