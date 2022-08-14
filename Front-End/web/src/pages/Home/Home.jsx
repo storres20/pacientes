@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import axios from 'axios'
+//import axios from 'axios'
 import NavBar from '../../components/NavBar/NavBar'
 import Pagina from '../../components/Pagina/Pagina'
 import ProductDataService from "../../services/ProductService"
@@ -39,7 +39,8 @@ function Home({ logout }) {
   const obtenerDatos = () => {
     // GET request for remote image in node.js
     //axios.get('http://localhost:3001/api/products')
-    axios.get('https://pacientes20-back.herokuapp.com/api/products')
+    //axios.get('https://pacientes20-back.herokuapp.com/api/products')
+    ProductDataService.getAll()
       .then(res => {
         //console.log(res.data);
         setRutas(res.data)
@@ -53,7 +54,8 @@ function Home({ logout }) {
   const obtenerCategorias = () => {
     // GET request for remote image in node.js
     //axios.get('http://localhost:3001/api/categories')
-    axios.get('https://pacientes20-back.herokuapp.com/api/categories')
+    //axios.get('https://pacientes20-back.herokuapp.com/api/categories')
+    ProductDataService.getAll2()
       .then(res => {
         //console.log(res.data);
         setCategorias(res.data)
