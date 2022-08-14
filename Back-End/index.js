@@ -23,7 +23,7 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to Pacientes Back-End application." });
 });
 
-app.post("/login", (req, res) => {
+app.post("/api/login", (req, res) => {
   const {username, password} = req.body
   console.log(req.body);
   //const values = [username, password]
