@@ -5,14 +5,18 @@ import {Link, useParams, useNavigate} from 'react-router-dom'
 
 import ProductDataService from "../../services/ProductService"
 
-// Datepicker
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-
 import './Edit.scss'
 //import './Loading.scss'
 
 import axios from 'axios'
+
+// Datepicker
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+// datepicker in spanish
+import { registerLocale } from  "react-datepicker";
+import es from 'date-fns/locale/es';
+registerLocale('es', es)
 
 
 function Edit({logout}) {
@@ -173,6 +177,13 @@ function Edit({logout}) {
                     onCalendarClose={handleInputChangeDate}
                     name="fecha"
                     autoComplete='off'
+                    
+                    peekNextMonth
+                    showMonthDropdown
+                    showYearDropdown
+                    dropdownMode="select"
+                    
+                    locale="es"
                   />
                 </div>
                 
