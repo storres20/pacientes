@@ -20,7 +20,7 @@ Es una web application, enfocada para la recepcion de una Clinica o Centro de Sa
 
 Constará con vista para celulares y para computadoras de escritorio.
 
-Puede ser accedido a traves de: <a href="https://alkemy20-front.netlify.app/" target="_blank">https://alkemy20-front.netlify.app/</a>
+Puede ser accedido a traves de: <a href="https://pacientes20.netlify.app/" target="_blank">https://pacientes20.netlify.app/</a>
 
 ## Guía de usuario
 ---
@@ -44,6 +44,6 @@ Tecnologias utilizadas
 
 ### 💻Pagina web: 📱
 <ul>
-<li> Frontend: <a href="https://alkemy20-front.netlify.app/" target="_blank">https://alkemy20-front.netlify.app/</a> </li>
-<li> Backend: <a href="https://alkemy20-back.herokuapp.com/" target="_blank">https://alkemy20-back.herokuapp.com/</a> </li>
+<li> Frontend: <a href="https://pacientes20.netlify.app/" target="_blank">https://pacientes20.netlify.app/</a> </li>
+<li> Backend: <a href="https://pacientes20-back.herokuapp.com/" target="_blank">https://pacientes20-back.herokuapp.com/</a> </li>
 </ul>
