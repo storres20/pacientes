@@ -186,6 +186,10 @@ function New({logout}) {
                 onCalendarClose={handleInputChangeDate}
                 name="fecha"
                 autoComplete='off'
+                peekNextMonth
+                showMonthDropdown
+                showYearDropdown
+                dropdownMode="select"
               />
             </div>
             
