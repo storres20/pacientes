@@ -9,6 +9,10 @@ import axios from 'axios'
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+// datepicker in spanish
+import { registerLocale } from  "react-datepicker";
+import es from 'date-fns/locale/es';
+registerLocale('es', es)
 
 
 function New({logout}) {
@@ -190,6 +194,8 @@ function New({logout}) {
                 showMonthDropdown
                 showYearDropdown
                 dropdownMode="select"
+                
+                locale="es"
               />
             </div>
             
