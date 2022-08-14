@@ -8,7 +8,7 @@ import ProductDataService from "../../services/ProductService"
 import './Edit.scss'
 //import './Loading.scss'
 
-import axios from 'axios'
+//import axios from 'axios'
 
 // Datepicker
 import DatePicker from "react-datepicker";
@@ -111,7 +111,8 @@ function Edit({logout}) {
   const obtenerCategorias = () => {
     // GET request for remote image in node.js
     //axios.get('http://localhost:3001/api/categories')
-    axios.get('https://pacientes20-back.herokuapp.com/api/categories')
+    //axios.get('https://pacientes20-back.herokuapp.com/api/categories')
+    ProductDataService.getAll2()
       .then(res => {
         //console.log(res.data);
         setCategorias(res.data)
