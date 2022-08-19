@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 //import LoginForm from '../../components/LoginForm/LoginForm'
 import ProductDataService from "../../services/ProductService";
 
-import logo from './logo.svg'
+import logo from './logo.png'
 import './Login.scss'
 //import './Loading.scss' // loading
 
