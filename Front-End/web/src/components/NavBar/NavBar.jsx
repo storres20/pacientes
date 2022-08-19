@@ -7,7 +7,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
 
 import './NavBar.scss'
-import logo from './logorb.svg'
+import logo from './logorb.png'
 
 function NavBar({logout}) {
   return (
