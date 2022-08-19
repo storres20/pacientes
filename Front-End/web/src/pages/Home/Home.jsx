@@ -180,7 +180,7 @@ function Home({ logout }) {
 
                 <Col>
                   <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                    <Form.Label>Categoria:</Form.Label>
+                    <Form.Label>Servicio / Especialidad:</Form.Label>
                     <Form.Select aria-label="Floating label select example" onChange={event => handleCategory(event)} ref={inputRef2}>
                       <option>--Todos--</option>
                       {
