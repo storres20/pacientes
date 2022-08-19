@@ -214,7 +214,7 @@ function Home({ logout }) {
                       <th className='text-center'>DNI</th>
                       <th className='text-center'>Fecha Nacimiento</th>
                       <th className='text-center'>Sexo</th>
-                      <th className='text-center'>Categoria</th>
+                      <th className='text-center'>Servicio / Especialidad</th>
                       <th className='text-center'>Accion</th>
                     </tr>
                   </thead>
