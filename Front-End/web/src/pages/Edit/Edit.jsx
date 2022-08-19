@@ -214,7 +214,7 @@ function Edit({logout}) {
                 </div>
                 
                 <div className="form-group mb-3">
-                  <label htmlFor="categoria">Categoria</label>
+                  <label htmlFor="categoria">Servicio / Especialidad</label>
                   <select className="form-select input" aria-label="Default select example"
                     id="categoria"
                     required={true}
