@@ -131,7 +131,7 @@ function New({logout}) {
         
         <div className="submit-form">
           <div className='formFlex'>
-            <h4>Nuevo Paciente</h4>
+            <h4 className='mt-4'>Nuevo Paciente</h4>
             <div className="form-group mb-3">
               <label htmlFor="concepto">Nombre</label>
               <input
