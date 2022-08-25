@@ -210,7 +210,7 @@ function Home({ logout }) {
           </Form>
           
           {/* "New" button */}
-          <Link to={"/new"}><Button variant="primary"><i className="bi bi-plus-circle"></i> Nuevo</Button></Link>
+          <Link to={"/new"} title='Nuevo Paciente'><Button variant="primary"><i className="bi bi-plus-circle"></i> Nuevo</Button></Link>
           
           {loading ? (
           
@@ -241,6 +241,11 @@ function Home({ logout }) {
                         <td className='text-center'>{item.tipo}</td>
                         <td className='text-center'>{item.categoria}</td>
                         <td className='text-center'>
+                          <Link to={"/new"} title='citas'>
+                            <Button variant="primary">
+                              <i className="bi bi-plus-circle"></i>
+                            </Button>
+                          </Link>
                           <Link
                             className='btn btn-warning m-1'
                             to={`/edit/${item.id}`}
@@ -248,7 +253,7 @@ function Home({ logout }) {
                           >
                             <i className="bi bi-pencil-fill"></i>
                           </Link>
-                          <button className="btn btn-danger ml-2"
+                          <button className="btn btn-danger"
                           onClick={() => deleteProduct2(`${item.id}`)}
                           title='borrar'
                           >
