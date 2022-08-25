@@ -138,7 +138,7 @@ function Edit({logout}) {
           <div>
             
             <div className="edit-form">
-              <h4>Editar Paciente</h4>
+              <h4 className='mt-4'>Editar Paciente</h4>
               <form>
                 <div className="form-group mb-3">
                   <label htmlFor="concepto">Nombre</label>
