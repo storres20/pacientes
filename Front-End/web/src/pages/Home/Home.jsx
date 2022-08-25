@@ -28,6 +28,7 @@ function Home({ logout }) {
   const [allData, setAllData] = useState([]);
   const [categorias, setCategorias] = useState([]); // list category
   const [loading, setLoading] = useState(false) // loading
+  const [noData, setNoData] = useState(false)  // noData
   
   // pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -81,10 +82,16 @@ function Home({ logout }) {
       inputRef2.current.value = "--Todos--";
       setRutas(results);
       setCurrentPage(1)
+      
+      if (results.length === 0) {
+        setNoData(true) // no data
+      }
+      else setNoData(false)
 
     } else {
       setRutas(allData);
       setCurrentPage(1)
+      setNoData(false) // no data
       // If the text field is empty, show all users
     }
 
@@ -104,10 +111,16 @@ function Home({ logout }) {
       inputRef.current.value = "";
       setRutas(results);
       setCurrentPage(1)
+      
+      if (results.length === 0) {
+        setNoData(true) // no data
+      }
+      else setNoData(false)
 
     } else {
       setRutas(allData);
       setCurrentPage(1)
+      setNoData(false) // no data
       // If the text field is empty, show all users
     }
 
@@ -248,6 +261,14 @@ function Home({ logout }) {
     
                   </tbody>
                 </Table>
+                
+                {noData ? (
+                
+                  <div className='text-center'>
+                    <h2>No data to show</h2>
+                  </div>
+                
+                ) : ("")}
                 
                 <Pagina postsPerPage={postsPerPage} totalPosts={rutas.length} paginate={paginate} currentPage={currentPage} />
     
