@@ -63,17 +63,39 @@ function NewDate({logout}) {
   };
   
   
-  const updateProduct = () => {
-    //console.log(currentProduct);
-    ProductDataService.update(currentProduct.id, currentProduct)
-      .then(response => {
-        //console.log(response.data);
-        /* setMessage("The Product was updated successfully!"); */
-        history("/home");
-      })
-      .catch(e => {
-        console.log(e);
-      });
+  const saveDate = () => {
+    if (currentProduct.nombre && currentProduct.dni && currentProduct.fechacita && currentProduct.fechacita2 && currentProduct.hora && currentProduct.categoria2) {
+    
+      var data = {
+        nombre: currentProduct.nombre,
+        dni: currentProduct.dni,
+        fechacita: currentProduct.fechacita,
+        fechacita2: currentProduct.fechacita2,
+        hora: currentProduct.hora,
+        categoria2: currentProduct.categoria2
+      };
+  
+      ProductDataService.createDate(data)
+        .then(response => {
+          setCurrentProduct({
+            id: response.data.id,
+            nombre: response.data.nombre,
+            dni: response.data.dni,
+            fechacita: response.data.fechacita,
+            fechacita2: response.data.fechacita2,
+            hora: response.data.hora,
+            categoria2: response.data.categoria2
+          });
+          //console.log(response.data);
+          history("/home");
+        })
+        .catch(e => {
+          console.log(e);
+        });
+        
+      }else {
+        alert("Faltan Datos")
+      }
   };
   
   
@@ -189,6 +211,7 @@ function NewDate({logout}) {
                     dropdownMode="select"
                     
                     locale="es"
+                    minDate={new Date()}
                   />
                 </div>
                 
@@ -239,7 +262,7 @@ function NewDate({logout}) {
               <button
                 type="submit"
                 className="btn btn-primary mt-3"
-                onClick={updateProduct}
+                onClick={saveDate}
               >
                 Registrar
               </button>
