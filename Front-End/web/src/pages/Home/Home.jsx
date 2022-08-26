@@ -75,7 +75,7 @@ function Home({ logout }) {
     if (keyword !== '') {
       const results = allData.filter((user) => {
         //return user.title.toLowerCase().startsWith(keyword.toLowerCase());
-        return user.concepto.toLowerCase().includes(keyword.toLowerCase());
+        return user.concepto.toLowerCase().includes(keyword.toLowerCase()) || user.monto.includes(keyword);
         // Use the toLowerCase() method to make it case-insensitive
       });
 
@@ -180,7 +180,7 @@ function Home({ logout }) {
                   <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>Busqueda:</Form.Label>
                     <Form.Control
-                      placeholder="Ingresar nombre"
+                      placeholder="Ingresar nombre o DNI"
                       aria-label="Ingresar nombre"
                       aria-describedby="basic-addon2"
                       className='inputLar'
