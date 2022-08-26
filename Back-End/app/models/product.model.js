@@ -2,8 +2,8 @@ const sql = require("./db.js");
 
 // constructor
 const Product = function(product) {
-  this.concepto = product.concepto;
-  this.monto = product.monto;
+  this.nombre = product.nombre;
+  this.dni = product.dni;
   this.fecha = product.fecha;
   this.fecha2 = product.fecha2;
   this.tipo = product.tipo;
@@ -79,7 +79,7 @@ Product.updateById = (id, product, result) => {
   sql.query(
     //"UPDATE products SET title = ?, description = ?, model = ?, quantity = ?, published = ?, warranty = ?, price = ? WHERE id = ?",
     //[product.title, product.description, product.model, product.quantity, product.warranty, product.price, id],
-    `UPDATE operacion SET concepto = '${product.concepto}', monto = '${product.monto}', fecha = '${product.fecha}', fecha2 = '${product.fecha2}', tipo = '${product.tipo}', categoria = '${product.categoria}' WHERE id = ${id}`,
+    `UPDATE operacion SET nombre = '${product.nombre}', dni = '${product.dni}', fecha = '${product.fecha}', fecha2 = '${product.fecha2}', tipo = '${product.tipo}', categoria = '${product.categoria}' WHERE id = ${id}`,
     (err, res) => {
       if (err) {
         console.log("error: ", err);

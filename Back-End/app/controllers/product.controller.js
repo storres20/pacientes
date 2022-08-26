@@ -11,8 +11,8 @@ exports.create = (req, res) => {
 
   // Create a Product
   const product = new Product({
-    concepto: req.body.concepto,
-    monto: req.body.monto,
+    nombre: req.body.nombre,
+    dni: req.body.dni,
     fecha: req.body.fecha,
     fecha2: req.body.fecha2,
     tipo: req.body.tipo,
