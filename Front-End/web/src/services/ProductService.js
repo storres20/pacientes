@@ -12,11 +12,17 @@ const get = id => {
   return http.get(`/products/${id}`);
 };
 
+// New.jsx
 const create = data => {
   return http.post("/products", data);
 };
 
-const create3 = data => {
+// NewDate.jsx
+const createDate = data => {
+  return http.post("/products", data);
+};
+
+const login = data => {
   return http.post("/login", data);
 };
 
@@ -42,7 +48,8 @@ const ProductDataService = {
   getAll2,
   get,
   create,
-  create3,
+  createDate,
+  login,
   update,
   remove,
   removeAll,
