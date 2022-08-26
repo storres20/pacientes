@@ -75,7 +75,7 @@ function Home({ logout }) {
     if (keyword !== '') {
       const results = allData.filter((user) => {
         //return user.title.toLowerCase().startsWith(keyword.toLowerCase());
-        return user.concepto.toLowerCase().includes(keyword.toLowerCase()) || user.monto.includes(keyword);
+        return user.nombre.toLowerCase().includes(keyword.toLowerCase()) || user.dni.includes(keyword);
         // Use the toLowerCase() method to make it case-insensitive
       });
 
@@ -235,8 +235,8 @@ function Home({ logout }) {
                     {currentPosts.map((item, index) => (
                       <tr key={item.id}>
                         <td className='text-center'>{index+1}</td>
-                        <td>{item.concepto}</td>
-                        <td className='text-center'>{item.monto}</td>
+                        <td>{item.nombre}</td>
+                        <td className='text-center'>{item.dni}</td>
                         <td className='text-center'>{item.fecha2}</td>
                         <td className='text-center'>{item.tipo}</td>
                         <td className='text-center'>{item.categoria}</td>

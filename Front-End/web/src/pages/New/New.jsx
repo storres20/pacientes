@@ -19,8 +19,8 @@ function New({logout}) {
 
   const initialProductState = {
     id: null,
-    concepto: "",
-    monto: "",
+    nombre: "",
+    dni: "",
     fecha: "",
     fecha2: "",
     tipo: "",
@@ -39,11 +39,11 @@ function New({logout}) {
 
   const saveProduct = () => {
   
-    if (product.concepto && product.monto && product.fecha && product.fecha2 && product.tipo && product.categoria) {
+    if (product.nombre && product.dni && product.fecha && product.fecha2 && product.tipo && product.categoria) {
     
     var data = {
-      concepto: product.concepto,
-      monto: product.monto,
+      nombre: product.nombre,
+      dni: product.dni,
       fecha: product.fecha,
       fecha2: product.fecha2,
       tipo: product.tipo,
@@ -54,8 +54,8 @@ function New({logout}) {
       .then(response => {
         setProduct({
           id: response.data.id,
-          concepto: response.data.concepto,
-          monto: response.data.monto,
+          nombre: response.data.nombre,
+          dni: response.data.dni,
           fecha: response.data.fecha,
           fecha2: response.data.fecha2,
           tipo: response.data.tipo,
@@ -133,29 +133,29 @@ function New({logout}) {
           <div className='formFlex'>
             <h4 className='mt-4'>Nuevo Paciente</h4>
             <div className="form-group mb-3">
-              <label htmlFor="concepto">Nombre</label>
+              <label htmlFor="nombre">Nombre</label>
               <input
                 type="text"
                 className="form-control input"
-                id="concepto"
+                id="nombre"
                 required={true}
-                value={product.concepto}
+                value={product.nombre}
                 onChange={handleInputChange}
-                name="concepto"
+                name="nombre"
                 autoComplete='off'
               />
             </div>
   
             <div className="form-group mb-3">
-              <label htmlFor="monto">DNI</label>
+              <label htmlFor="dni">DNI</label>
               <input
                 type="text"
                 className="form-control input"
-                id="monto"
+                id="dni"
                 required={true}
-                value={product.monto}
+                value={product.dni}
                 onChange={handleInputChange}
-                name="monto"
+                name="dni"
                 autoComplete='off'
               />
             </div>

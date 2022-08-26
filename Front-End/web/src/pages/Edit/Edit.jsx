@@ -23,8 +23,8 @@ function Edit({logout}) {
 
   const initialProductState = {
     id: null,
-    concepto: "",
-    monto: "",
+    nombre: "",
+    dni: "",
     fecha: "",
     fecha2: "",
     tipo: "",
@@ -141,26 +141,26 @@ function Edit({logout}) {
               <h4 className='mt-4'>Editar Paciente</h4>
               <form>
                 <div className="form-group mb-3">
-                  <label htmlFor="concepto">Nombre</label>
+                  <label htmlFor="nombre">Nombre</label>
                   <input
                     type="text"
                     className="form-control input"
-                    id="concepto"
-                    name="concepto"
-                    value={currentProduct.concepto}
+                    id="nombre"
+                    name="nombre"
+                    value={currentProduct.nombre}
                     onChange={handleInputChange}
                     autoComplete='off'
                   />
                 </div>
                 
                 <div className="form-group mb-3">
-                  <label htmlFor="monto">DNI</label>
+                  <label htmlFor="dni">DNI</label>
                   <input
                     type="text"
                     className="form-control input"
-                    id="monto"
-                    name="monto"
-                    value={currentProduct.monto}
+                    id="dni"
+                    name="dni"
+                    value={currentProduct.dni}
                     onChange={handleInputChange}
                     autoComplete='off'
                   />
