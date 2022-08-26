@@ -33,7 +33,7 @@ function Login({authenticate}) {
     /* console.log(body) */
     //axios.post('http://localhost:3001/login', body)
     //axios.post('https://pacientes20-back.herokuapp.com/login', body)
-    ProductDataService.create3(body)
+    ProductDataService.login(body)
     .then(({data}) => {
       //console.log(data);
       authenticate()
