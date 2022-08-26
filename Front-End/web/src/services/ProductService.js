@@ -19,7 +19,7 @@ const create = data => {
 
 // NewDate.jsx
 const createDate = data => {
-  return http.post("/products", data);
+  return http.post("/dates", data);
 };
 
 const login = data => {
