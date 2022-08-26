@@ -241,7 +241,7 @@ function Home({ logout }) {
                         <td className='text-center'>{item.tipo}</td>
                         <td className='text-center'>{item.categoria}</td>
                         <td className='text-center'>
-                          <Link to={"/new"} title='citas'>
+                          <Link to={`/newdate/${item.id}`} title='citas'>
                             <Button variant="primary">
                               <i className="bi bi-plus-circle"></i>
                             </Button>
