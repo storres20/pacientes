@@ -244,7 +244,7 @@ function Home({ logout }) {
                           <Link to={`/newdate/${item.id}`} title='nueva cita' className='btn btn-primary m-1'>
                             <i className="bi bi-plus-circle-fill"></i>
                           </Link>
-                          <Link to={`/newdate/${item.id}`} title='resumen cita' className='btn btn-success'>
+                          <Link to={`/resumen/dni/${item.dni}`} title='resumen cita' className='btn btn-success'>
                             <i className="bi bi-eye-fill"></i>
                           </Link>
                           <Link
