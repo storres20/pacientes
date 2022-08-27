@@ -44,7 +44,7 @@ Date.findById = (id, result) => {
 
 
 Date.getAll = (title, result) => {
-  let query = "SELECT * FROM operacion ORDER BY fecha2";
+  let query = "SELECT * FROM cita ORDER BY fechacita2";
 
   if (title) {
     query += ` WHERE title LIKE '%${title}%'`;
@@ -57,7 +57,7 @@ Date.getAll = (title, result) => {
       return;
     }
 
-    console.log("products: ", res);
+    console.log("dates: ", res);
     result(null, res);
   });
 };
