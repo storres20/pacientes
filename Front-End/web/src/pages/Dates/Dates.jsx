@@ -9,7 +9,7 @@ import {Link} from 'react-router-dom'
 import './Dates.scss'
 //import './Loading.scss'
 
-import Button from 'react-bootstrap/Button';
+//import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
 import Form from 'react-bootstrap/Form';
@@ -21,6 +21,13 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+// datepicker in spanish
+import { registerLocale } from  "react-datepicker";
+import es from 'date-fns/locale/es';
+registerLocale('es', es)
+
 
 function Dates({ logout }) {
 
@@ -29,6 +36,7 @@ function Dates({ logout }) {
   const [categorias, setCategorias] = useState([]); // list category
   const [loading, setLoading] = useState(false) // loading
   const [noData, setNoData] = useState(false)  // noData
+  const [startDate, setStartDate] = useState(null);
   
   // pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -36,26 +44,47 @@ function Dates({ logout }) {
 
   const inputRef = useRef(null);
   const inputRef2 = useRef(null);
+  
+  
 
   const obtenerDatos = () => {
-    // GET request for remote image in node.js
-    //axios.get('http://localhost:3001/api/products')
-    //axios.get('https://pacientes20-back.herokuapp.com/api/products')
-    ProductDataService.getAll3()
-      .then(res => {
-        //console.log(res.data);
-        setRutas(res.data)
-        setAllData(res.data)
+    
+    if (startDate !== null) {
+    
+      let fecha = startDate.valueOf();
+      //console.log(fecha)
+      // GET request for remote image in node.js 1662742735000
+      ProductDataService.getDate(fecha)
+        .then(res => {
+          //console.log(res.data);
+          setRutas(res.data)
+          setAllData(res.data)
+          
+          setLoading(true) // loading
+          //console.log(res)
+          if (res.length === 0) {
+            setNoData(true) // no data
+          }
+          else setNoData(false)
+          
+        })
+        .catch(e => {
+          setLoading(true) // loading
+          setNoData(true) // no data
+          setRutas([])
+        });
         
-        setLoading(true) // loading
-        
-      })
+    }else{
+    
+      setLoading(true) // loading
+      setNoData(true) // no data
+    
+    }
+      
   }
 
   const obtenerCategorias = () => {
     // GET request for remote image in node.js
-    //axios.get('http://localhost:3001/api/categories')
-    //axios.get('https://pacientes20-back.herokuapp.com/api/categories')
     ProductDataService.getAll2()
       .then(res => {
         //console.log(res.data);
@@ -153,6 +182,17 @@ function Dates({ logout }) {
     }
     
   };
+  
+  
+  const handleOnChangeDate = (date) => {
+    const a = new Date(date)
+    //console.log(a.valueOf())
+    
+    setStartDate(a)
+    
+    
+  }
+
 
   return (
     <div style={{height: '100vh'}}  className='bgDiv'>
@@ -169,7 +209,28 @@ function Dates({ logout }) {
           
           <InputGroup className="mt-3 mb-3">
             <InputGroup.Text id="basic-addon1">Fecha de Cita:</InputGroup.Text>
-            <Form.Label className="label"><span>{allData.length}</span></Form.Label>
+            <DatePicker
+                className="form-control"
+                wrapperClassName='input2'
+                dateFormat="dd/MM/yyyy"
+                selected={startDate}
+                placeholderText="--Seleccionar--"
+                
+                id="fecha"
+                required={true}
+                value={startDate}
+                onChange={date => handleOnChangeDate(date)}
+                onCalendarClose={obtenerDatos}
+                //onChange={(date) => setStartDate(date)}
+                name="fecha"
+                autoComplete='off'
+                peekNextMonth
+                showMonthDropdown
+                showYearDropdown
+                dropdownMode="select"
+                
+                locale="es"
+              />
           </InputGroup>
 
 
@@ -241,7 +302,7 @@ function Dates({ logout }) {
                         <td className='text-center'>{item.hora}</td>
                         <td className='text-center'>{item.categoria2}</td>
                         <td className='text-center'>
-                          <Link to={`/newdate/${item.id}`} title='nueva cita' className='btn btn-primary m-1'>
+                          {/* <Link to={`/newdate/${item.id}`} title='nueva cita' className='btn btn-primary m-1'>
                             <i className="bi bi-plus-circle-fill"></i>
                           </Link>
                           <Link to={`/newdate/${item.id}`} title='resumen cita' className='btn btn-success'>
@@ -259,7 +320,7 @@ function Dates({ logout }) {
                           title='borrar paciente'
                           >
                             <i className="bi bi-trash-fill"></i>
-                          </button>
+                          </button> */}
                         </td>
                       </tr>
                     ))}
