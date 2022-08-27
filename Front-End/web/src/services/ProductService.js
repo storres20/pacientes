@@ -16,6 +16,11 @@ const get = id => {
   return http.get(`/products/${id}`);
 };
 
+// Dates.jsx
+const getDate = id => {
+  return http.get(`/dates/${id}`);
+};
+
 // New.jsx
 const create = data => {
   return http.post("/products", data);
@@ -52,6 +57,7 @@ const ProductDataService = {
   getAll2,
   getAll3,
   get,
+  getDate,
   create,
   createDate,
   login,
