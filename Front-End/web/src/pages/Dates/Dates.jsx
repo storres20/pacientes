@@ -22,7 +22,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 
-function Home({ logout }) {
+function Dates({ logout }) {
 
   const [rutas, setRutas] = useState([]);
   const [allData, setAllData] = useState([]);
@@ -41,7 +41,7 @@ function Home({ logout }) {
     // GET request for remote image in node.js
     //axios.get('http://localhost:3001/api/products')
     //axios.get('https://pacientes20-back.herokuapp.com/api/products')
-    ProductDataService.getAll()
+    ProductDataService.getAll3()
       .then(res => {
         //console.log(res.data);
         setRutas(res.data)
@@ -104,7 +104,7 @@ function Home({ logout }) {
     if (keyword !== '--Todos--') {
       const results = allData.filter((user) => {
         //return user.title.toLowerCase().startsWith(keyword.toLowerCase());
-        return user.categoria.toLowerCase().includes(keyword.toLowerCase());
+        return user.categoria2.toLowerCase().includes(keyword.toLowerCase());
         // Use the toLowerCase() method to make it case-insensitive
       });
 
@@ -210,7 +210,7 @@ function Home({ logout }) {
           </Form>
           
           {/* "New" button */}
-          <Link to={"/new"} title='Nuevo Paciente'><Button variant="primary"><i className="bi bi-plus-circle"></i> Nuevo</Button></Link>
+          {/* <Link to={"/new"} title='Nuevo Paciente'><Button variant="primary"><i className="bi bi-plus-circle"></i> Nuevo</Button></Link> */}
           
           {loading ? (
           
@@ -225,8 +225,8 @@ function Home({ logout }) {
                       <th className='text-center'>N°</th>
                       <th>Nombre</th>
                       <th className='text-center'>DNI</th>
-                      <th className='text-center'>Fecha Nacimiento</th>
-                      <th className='text-center'>Sexo</th>
+                      <th className='text-center'>Fecha de Cita</th>
+                      <th className='text-center'>Hora</th>
                       <th className='text-center'>Servicio / Especialidad</th>
                       <th className='text-center'>Accion</th>
                     </tr>
@@ -237,9 +237,9 @@ function Home({ logout }) {
                         <td className='text-center'>{index+1}</td>
                         <td>{item.nombre}</td>
                         <td className='text-center'>{item.dni}</td>
-                        <td className='text-center'>{item.fecha2}</td>
-                        <td className='text-center'>{item.tipo}</td>
-                        <td className='text-center'>{item.categoria}</td>
+                        <td className='text-center'>{item.fechacita2}</td>
+                        <td className='text-center'>{item.hora}</td>
+                        <td className='text-center'>{item.categoria2}</td>
                         <td className='text-center'>
                           <Link to={`/newdate/${item.id}`} title='nueva cita' className='btn btn-primary m-1'>
                             <i className="bi bi-plus-circle-fill"></i>
@@ -298,4 +298,4 @@ function Home({ logout }) {
   )
 }
 
-export default Home
+export default Dates
