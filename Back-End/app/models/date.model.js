@@ -42,6 +42,25 @@ Date.findById = (id, result) => {
   });
 };
 
+Date.findByDNI = (id, result) => {
+  sql.query(`SELECT * FROM cita WHERE dni = ${id}`, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
+
+    if (res.length) {
+      console.log("found date: ", res);
+      result(null, res);
+      return;
+    }
+
+    // not found Product with the id
+    result({ kind: "not_found" }, null);
+  });
+};
+
 
 Date.getAll = (title, result) => {
   let query = "SELECT * FROM cita ORDER BY fechacita2";
