@@ -8,8 +8,17 @@ const getAll2 = () => {
   return http.get("/categories");
 };
 
+const getAll3 = () => {
+  return http.get("/dates");
+};
+
 const get = id => {
   return http.get(`/products/${id}`);
+};
+
+// Dates.jsx
+const getDate = id => {
+  return http.get(`/dates/${id}`);
 };
 
 // New.jsx
@@ -46,7 +55,9 @@ const findByTitle = title => {
 const ProductDataService = {
   getAll,
   getAll2,
+  getAll3,
   get,
+  getDate,
   create,
   createDate,
   login,

@@ -31,7 +31,7 @@ function NavBar({logout}) {
               navbarScroll
             >
               <Link to="/home" className='link'>Home</Link>
-              {/* <Link to="/about" className='link'>About</Link> */}
+              <Link to="/dates" className='link'>Dates</Link>
               
             </Nav>
             

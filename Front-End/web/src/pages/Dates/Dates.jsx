@@ -6,10 +6,10 @@ import ProductDataService from "../../services/ProductService"
 
 import {Link} from 'react-router-dom'
 
-import './Home.scss'
+import './Dates.scss'
 //import './Loading.scss'
 
-import Button from 'react-bootstrap/Button';
+//import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
 import Form from 'react-bootstrap/Form';
@@ -21,14 +21,22 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+// datepicker in spanish
+import { registerLocale } from  "react-datepicker";
+import es from 'date-fns/locale/es';
+registerLocale('es', es)
 
-function Home({ logout }) {
+
+function Dates({ logout }) {
 
   const [rutas, setRutas] = useState([]);
   const [allData, setAllData] = useState([]);
   const [categorias, setCategorias] = useState([]); // list category
   const [loading, setLoading] = useState(false) // loading
   const [noData, setNoData] = useState(false)  // noData
+  const [startDate, setStartDate] = useState(null);
   
   // pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -36,26 +44,47 @@ function Home({ logout }) {
 
   const inputRef = useRef(null);
   const inputRef2 = useRef(null);
+  
+  
 
   const obtenerDatos = () => {
-    // GET request for remote image in node.js
-    //axios.get('http://localhost:3001/api/products')
-    //axios.get('https://pacientes20-back.herokuapp.com/api/products')
-    ProductDataService.getAll()
-      .then(res => {
-        //console.log(res.data);
-        setRutas(res.data)
-        setAllData(res.data)
+    
+    if (startDate !== null) {
+    
+      let fecha = startDate.valueOf();
+      //console.log(fecha)
+      // GET request for remote image in node.js 1662742735000
+      ProductDataService.getDate(fecha)
+        .then(res => {
+          //console.log(res.data);
+          setRutas(res.data)
+          setAllData(res.data)
+          
+          setLoading(true) // loading
+          //console.log(res)
+          if (res.length === 0) {
+            setNoData(true) // no data
+          }
+          else setNoData(false)
+          
+        })
+        .catch(e => {
+          setLoading(true) // loading
+          setNoData(true) // no data
+          setRutas([])
+        });
         
-        setLoading(true) // loading
-        
-      })
+    }else{
+    
+      setLoading(true) // loading
+      setNoData(true) // no data
+    
+    }
+      
   }
 
   const obtenerCategorias = () => {
     // GET request for remote image in node.js
-    //axios.get('http://localhost:3001/api/categories')
-    //axios.get('https://pacientes20-back.herokuapp.com/api/categories')
     ProductDataService.getAll2()
       .then(res => {
         //console.log(res.data);
@@ -104,7 +133,7 @@ function Home({ logout }) {
     if (keyword !== '--Todos--') {
       const results = allData.filter((user) => {
         //return user.title.toLowerCase().startsWith(keyword.toLowerCase());
-        return user.categoria.toLowerCase().includes(keyword.toLowerCase());
+        return user.categoria2.toLowerCase().includes(keyword.toLowerCase());
         // Use the toLowerCase() method to make it case-insensitive
       });
 
@@ -153,6 +182,17 @@ function Home({ logout }) {
     }
     
   };
+  
+  
+  const handleOnChangeDate = (date) => {
+    const a = new Date(date)
+    //console.log(a.valueOf())
+    
+    setStartDate(a)
+    
+    
+  }
+
 
   return (
     <div style={{height: '100vh'}}  className='bgDiv'>
@@ -160,16 +200,37 @@ function Home({ logout }) {
 
       <Card className='bgDiv'>
         <Card.Body>
-          <Card.Title><h1>Bienvenido</h1></Card.Title>
+          <Card.Title><h1>Citas</h1></Card.Title>
           <Card.Text>
-          Este sistema le permite visualizar el listado de pacientes
+          Esta página le permite visualizar los <b>pacientes citados</b> según la <b>fecha del calendario</b>
           </Card.Text>
 
           <Card.Title>Listado:</Card.Title>
           
           <InputGroup className="mt-3 mb-3">
-            <InputGroup.Text id="basic-addon1">Total de pacientes:</InputGroup.Text>
-            <Form.Label className="label"><span>{allData.length}</span></Form.Label>
+            <InputGroup.Text id="basic-addon1">Fecha de Cita:</InputGroup.Text>
+            <DatePicker
+                className="form-control"
+                wrapperClassName='input2'
+                dateFormat="dd/MM/yyyy"
+                selected={startDate}
+                placeholderText="--Seleccionar--"
+                
+                id="fecha"
+                required={true}
+                value={startDate}
+                onChange={date => handleOnChangeDate(date)}
+                onCalendarClose={obtenerDatos}
+                //onChange={(date) => setStartDate(date)}
+                name="fecha"
+                autoComplete='off'
+                peekNextMonth
+                showMonthDropdown
+                showYearDropdown
+                dropdownMode="select"
+                
+                locale="es"
+              />
           </InputGroup>
 
 
@@ -210,7 +271,7 @@ function Home({ logout }) {
           </Form>
           
           {/* "New" button */}
-          <Link to={"/new"} title='Nuevo Paciente'><Button variant="primary"><i className="bi bi-plus-circle"></i> Nuevo</Button></Link>
+          {/* <Link to={"/new"} title='Nuevo Paciente'><Button variant="primary"><i className="bi bi-plus-circle"></i> Nuevo</Button></Link> */}
           
           {loading ? (
           
@@ -225,8 +286,8 @@ function Home({ logout }) {
                       <th className='text-center'>N°</th>
                       <th>Nombre</th>
                       <th className='text-center'>DNI</th>
-                      <th className='text-center'>Fecha Nacimiento</th>
-                      <th className='text-center'>Sexo</th>
+                      <th className='text-center'>Fecha de Cita</th>
+                      <th className='text-center'>Hora</th>
                       <th className='text-center'>Servicio / Especialidad</th>
                       <th className='text-center'>Accion</th>
                     </tr>
@@ -237,11 +298,11 @@ function Home({ logout }) {
                         <td className='text-center'>{index+1}</td>
                         <td>{item.nombre}</td>
                         <td className='text-center'>{item.dni}</td>
-                        <td className='text-center'>{item.fecha2}</td>
-                        <td className='text-center'>{item.tipo}</td>
-                        <td className='text-center'>{item.categoria}</td>
+                        <td className='text-center'>{item.fechacita2}</td>
+                        <td className='text-center'>{item.hora}</td>
+                        <td className='text-center'>{item.categoria2}</td>
                         <td className='text-center'>
-                          <Link to={`/newdate/${item.id}`} title='nueva cita' className='btn btn-primary m-1'>
+                          {/* <Link to={`/newdate/${item.id}`} title='nueva cita' className='btn btn-primary m-1'>
                             <i className="bi bi-plus-circle-fill"></i>
                           </Link>
                           <Link to={`/newdate/${item.id}`} title='resumen cita' className='btn btn-success'>
@@ -259,7 +320,7 @@ function Home({ logout }) {
                           title='borrar paciente'
                           >
                             <i className="bi bi-trash-fill"></i>
-                          </button>
+                          </button> */}
                         </td>
                       </tr>
                     ))}
@@ -298,4 +359,4 @@ function Home({ logout }) {
   )
 }
 
-export default Home
+export default Dates
