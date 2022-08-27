@@ -244,19 +244,19 @@ function Home({ logout }) {
                           <Link to={`/newdate/${item.id}`} title='nueva cita' className='btn btn-primary m-1'>
                             <i className="bi bi-plus-circle-fill"></i>
                           </Link>
-                          <Link to={`/newdate/${item.id}`} title='resumen' className='btn btn-success'>
+                          <Link to={`/newdate/${item.id}`} title='resumen cita' className='btn btn-success'>
                             <i className="bi bi-eye-fill"></i>
                           </Link>
                           <Link
                             className='btn btn-warning m-1'
                             to={`/edit/${item.id}`}
-                            title='editar'
+                            title='editar paciente'
                           >
                             <i className="bi bi-pencil-fill"></i>
                           </Link>
                           <button className="btn btn-danger"
                           onClick={() => deleteProduct2(`${item.id}`)}
-                          title='borrar'
+                          title='borrar paciente'
                           >
                             <i className="bi bi-trash-fill"></i>
                           </button>
