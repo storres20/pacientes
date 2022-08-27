@@ -5,3 +5,11 @@ module.exports = {
   PASSWORD: "6Tgus2xAhsO3bPYOxcJa",
   DB: "bct10i5bxqghdheg6nu1"
 };
+
+//localhost
+/*module.exports = {
+  HOST: "localhost",
+  USER: "root",
+  PASSWORD: "",
+  DB: "pacientes"
+};*/
