@@ -21,6 +21,11 @@ const getDate = id => {
   return http.get(`/dates/${id}`);
 };
 
+// Resumen.jsx
+const getDateDNI = id => {
+  return http.get(`/dates/dni/${id}`);
+};
+
 // New.jsx
 const create = data => {
   return http.post("/products", data);
@@ -58,6 +63,7 @@ const ProductDataService = {
   getAll3,
   get,
   getDate,
+  getDateDNI,
   create,
   createDate,
   login,

@@ -62,6 +62,23 @@ exports.findOne = (req, res) => {
   });
 };
 
+// Find a single Product by Id - DNI
+exports.findOneDNI = (req, res) => {
+  Date.findByDNI(req.params.id, (err, data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `Not found Product with id ${req.params.id}.`
+        });
+      } else {
+        res.status(500).send({
+          message: "Error retrieving Product with id " + req.params.id
+        });
+      }
+    } else res.send(data);
+  });
+};
+
 // find all published Products
 exports.findAllPublished = (req, res) => {
   Date.getAllPublished((err, data) => {

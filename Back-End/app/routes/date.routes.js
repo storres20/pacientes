@@ -15,6 +15,9 @@ module.exports = app => {
   // Retrieve a single Date with id
   router.get("/:id", dates.findOne);
 
+  // Retrieve a single Date with id
+  router.get("/dni/:id", dates.findOneDNI);
+
   // Update a Date with id
   router.put("/:id", dates.update);
 

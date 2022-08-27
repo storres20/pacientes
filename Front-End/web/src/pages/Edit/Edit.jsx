@@ -125,7 +125,7 @@ function Edit({logout}) {
   
 
   return (
-    <div className='bgDiv' style={{height: '100vh'}}>
+    <div className='bgDiv2' style={{height: '100vh'}}>
       <NavBar logout={logout} />
       
       <div className="flex1">
