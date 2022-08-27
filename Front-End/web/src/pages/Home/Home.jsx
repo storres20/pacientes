@@ -210,7 +210,7 @@ function Home({ logout }) {
           </Form>
           
           {/* "New" button */}
-          <Link to={"/new"} title='Nuevo Paciente'><Button variant="primary"><i className="bi bi-plus-circle"></i> Nuevo</Button></Link>
+          <Link to={"/new"} title='Nuevo Paciente'><Button variant="primary"><i className="bi bi-plus-circle-fill"></i> Nuevo</Button></Link>
           
           {loading ? (
           

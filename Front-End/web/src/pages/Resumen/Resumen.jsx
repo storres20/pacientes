@@ -190,7 +190,7 @@ function Resumen({ logout }) {
           </Card.Text>
 
           <Card.Title>Paciente:</Card.Title>
-          <Card.Subtitle className="mb-4 text-muted">{rutas===[] ? "" : rutas[0].nombre }</Card.Subtitle>
+          <Card.Subtitle className="mb-4 text-muted">{allData===[] ? "" : allData[0].nombre }</Card.Subtitle>
 
           <Form>
             <Container>
