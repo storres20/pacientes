@@ -241,10 +241,11 @@ function Home({ logout }) {
                         <td className='text-center'>{item.tipo}</td>
                         <td className='text-center'>{item.categoria}</td>
                         <td className='text-center'>
-                          <Link to={`/newdate/${item.id}`} title='citas'>
-                            <Button variant="primary">
-                              <i className="bi bi-plus-circle"></i>
-                            </Button>
+                          <Link to={`/newdate/${item.id}`} title='nueva cita' className='btn btn-primary m-1'>
+                            <i className="bi bi-plus-circle-fill"></i>
+                          </Link>
+                          <Link to={`/newdate/${item.id}`} title='resumen' className='btn btn-success'>
+                            <i className="bi bi-eye-fill"></i>
                           </Link>
                           <Link
                             className='btn btn-warning m-1'
