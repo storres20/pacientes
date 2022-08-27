@@ -24,7 +24,7 @@ Date.create = (newDate, result) => {
 };
 
 Date.findById = (id, result) => {
-  sql.query(`SELECT * FROM operacion WHERE id = ${id}`, (err, res) => {
+  sql.query(`SELECT * FROM cita WHERE fechacita = ${id}`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -32,8 +32,8 @@ Date.findById = (id, result) => {
     }
 
     if (res.length) {
-      console.log("found product: ", res[0]);
-      result(null, res[0]);
+      console.log("found date: ", res);
+      result(null, res);
       return;
     }
 
