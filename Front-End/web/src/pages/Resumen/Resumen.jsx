@@ -96,7 +96,7 @@ function Resumen({ logout }) {
     if (keyword !== '') {
       const results = allData.filter((user) => {
         //return user.title.toLowerCase().startsWith(keyword.toLowerCase());
-        return user.nombre.toLowerCase().includes(keyword.toLowerCase()) || user.dni.includes(keyword);
+        return user.fechacita2.toLowerCase().includes(keyword.toLowerCase()) || user.hora.includes(keyword);
         // Use the toLowerCase() method to make it case-insensitive
       });
 
@@ -177,10 +177,12 @@ function Resumen({ logout }) {
   
 
   return (
-    <div style={{height: '100vh'}}  className='bgDiv'>
+    <div style={{height: '100vh'}}  className='bgDiv3'>
       <NavBar logout={logout} />
-
-      <Card className='bgDiv'>
+      
+      {loading ? (
+      
+      <Card className='bgDiv3'>
         <Card.Body>
           <Card.Title><h1>Resumen de Citas - Paciente</h1></Card.Title>
           <Card.Text>
@@ -188,7 +190,7 @@ function Resumen({ logout }) {
           </Card.Text>
 
           <Card.Title>Paciente:</Card.Title>
-          <Card.Subtitle className="mb-4 text-muted">{rutas===[] ? "" : rutas.nombre }</Card.Subtitle>
+          <Card.Subtitle className="mb-4 text-muted">{rutas===[] ? "" : rutas[0].nombre }</Card.Subtitle>
 
           <Form>
             <Container>
@@ -197,7 +199,7 @@ function Resumen({ logout }) {
                   <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>Busqueda:</Form.Label>
                     <Form.Control
-                      placeholder="Ingresar nombre o DNI"
+                      placeholder="Ingresar fecha u hora"
                       aria-label="Ingresar nombre"
                       aria-describedby="basic-addon2"
                       className='inputLar'
@@ -229,87 +231,83 @@ function Resumen({ logout }) {
           {/* "New" button */}
           {/* <Link to={"/new"} title='Nuevo Paciente'><Button variant="primary"><i className="bi bi-plus-circle"></i> Nuevo</Button></Link> */}
           
-          {loading ? (
-          
-            <Card>
-              <Card.Body  className='bgDiv'>
-              
-                <Pagina postsPerPage={postsPerPage} totalPosts={rutas.length} paginate={paginate} currentPage={currentPage} />
-    
-                <Table striped bordered hover size="md" responsive >
-                  <thead>
-                    <tr>
-                      <th className='text-center'>N°</th>
-                      <th>Nombre</th>
-                      <th className='text-center'>DNI</th>
-                      <th className='text-center'>Fecha de Cita</th>
-                      <th className='text-center'>Hora</th>
-                      <th className='text-center'>Servicio / Especialidad</th>
-                      <th className='text-center'>Accion</th>
+          <Card>
+            <Card.Body  className='bgDiv3'>
+            
+              <Pagina postsPerPage={postsPerPage} totalPosts={rutas.length} paginate={paginate} currentPage={currentPage} />
+  
+              <Table striped bordered hover size="md" responsive >
+                <thead>
+                  <tr>
+                    <th className='text-center'>N°</th>
+                    <th>Nombre</th>
+                    <th className='text-center'>DNI</th>
+                    <th className='text-center'>Fecha de Cita</th>
+                    <th className='text-center'>Hora</th>
+                    <th className='text-center'>Servicio / Especialidad</th>
+                    <th className='text-center'>Accion</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {currentPosts.map((item, index) => (
+                    <tr key={item.id}>
+                      <td className='text-center'>{index+1}</td>
+                      <td>{item.nombre}</td>
+                      <td className='text-center'>{item.dni}</td>
+                      <td className='text-center'>{item.fechacita2}</td>
+                      <td className='text-center'>{item.hora}</td>
+                      <td className='text-center'>{item.categoria2}</td>
+                      <td className='text-center'>
+                        {/* <Link to={`/newdate/${item.id}`} title='nueva cita' className='btn btn-primary m-1'>
+                          <i className="bi bi-plus-circle-fill"></i>
+                        </Link>
+                        <Link to={`/newdate/${item.id}`} title='resumen cita' className='btn btn-success'>
+                          <i className="bi bi-eye-fill"></i>
+                        </Link>
+                        <Link
+                          className='btn btn-warning m-1'
+                          to={`/edit/${item.id}`}
+                          title='editar paciente'
+                        >
+                          <i className="bi bi-pencil-fill"></i>
+                        </Link>
+                        <button className="btn btn-danger"
+                        onClick={() => deleteProduct2(`${item.id}`)}
+                        title='borrar paciente'
+                        >
+                          <i className="bi bi-trash-fill"></i>
+                        </button> */}
+                      </td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    {currentPosts.map((item, index) => (
-                      <tr key={item.id}>
-                        <td className='text-center'>{index+1}</td>
-                        <td>{item.nombre}</td>
-                        <td className='text-center'>{item.dni}</td>
-                        <td className='text-center'>{item.fechacita2}</td>
-                        <td className='text-center'>{item.hora}</td>
-                        <td className='text-center'>{item.categoria2}</td>
-                        <td className='text-center'>
-                          {/* <Link to={`/newdate/${item.id}`} title='nueva cita' className='btn btn-primary m-1'>
-                            <i className="bi bi-plus-circle-fill"></i>
-                          </Link>
-                          <Link to={`/newdate/${item.id}`} title='resumen cita' className='btn btn-success'>
-                            <i className="bi bi-eye-fill"></i>
-                          </Link>
-                          <Link
-                            className='btn btn-warning m-1'
-                            to={`/edit/${item.id}`}
-                            title='editar paciente'
-                          >
-                            <i className="bi bi-pencil-fill"></i>
-                          </Link>
-                          <button className="btn btn-danger"
-                          onClick={() => deleteProduct2(`${item.id}`)}
-                          title='borrar paciente'
-                          >
-                            <i className="bi bi-trash-fill"></i>
-                          </button> */}
-                        </td>
-                      </tr>
-                    ))}
-    
-    
-                  </tbody>
-                </Table>
-                
-                {noData ? (
-                
-                  <div className='text-center'>
-                    <h2>No data to show</h2>
-                  </div>
-                
-                ) : ("")}
-                
-                <Pagina postsPerPage={postsPerPage} totalPosts={rutas.length} paginate={paginate} currentPage={currentPage} />
-    
-              </Card.Body>
-            </Card>
-          
-          ) : (
-          
-            <div className="flexLoad" >
-              <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
-            </div>
-          
-          )}
-          
-          
+                  ))}
+  
+  
+                </tbody>
+              </Table>
+              
+              {noData ? (
+              
+                <div className='text-center'>
+                  <h2>No data to show</h2>
+                </div>
+              
+              ) : ("")}
+              
+              <Pagina postsPerPage={postsPerPage} totalPosts={rutas.length} paginate={paginate} currentPage={currentPage} />
+  
+            </Card.Body>
+          </Card>
 
         </Card.Body>
       </Card>
+      
+      ) : (
+          
+        <div className="flexLoad" >
+          <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
+        </div>
+      
+      )}
 
     </div>
   )
