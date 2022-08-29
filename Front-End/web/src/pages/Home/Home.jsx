@@ -161,10 +161,16 @@ function Home({ logout }) {
   };
   
   
+  // ****************************
   // Modal - Nuevo paciente
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false)
+    setStartDate(null)
+    setProduct(initialProductState) // seteo product
+  };
+  
   const handleShow = () => setShow(true);
   
   
@@ -254,6 +260,99 @@ function Home({ logout }) {
     
     setStartDate(a)
   }
+  
+  // **********************************
+  
+  
+  // ****************************
+  // Modal - Nueva Cita
+  const [showNDate, setShowNDate] = useState(false);
+
+  const handleCloseNDate = () => {
+    setShowNDate(false)
+    setStartDate(null)
+    setCurrentProduct(initialProductState2) // seteo product
+  };
+  
+  
+  const handleShowNDate = () => setShowNDate(true);
+  
+  const initialProductState2 = {
+    id: null,
+    nombre: "",
+    dni: "",
+    fechacita: "",
+    fechacita2: "",
+    hora: "",
+    categoria2: ""
+  };
+  
+  const [currentProduct, setCurrentProduct] = useState(initialProductState2);
+  
+  const handle2 = (item) => {
+    //console.log(item)
+    setCurrentProduct(item)
+    handleShowNDate()
+  }
+  
+  const handleInputChange2 = event => {
+    const { name, value } = event.target;
+    setCurrentProduct({ ...currentProduct, [name]: value });
+  };
+  
+  const handleInputChangeDate2 = () => {
+    // startDate to dd/MM/yyyy
+    let current = startDate
+    
+    if (current !== null) {
+      let b = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`
+      
+      //console.log(b) // dd/MM/yyyy
+      
+      setCurrentProduct({ ...currentProduct, 'fechacita': startDate.valueOf(), 'fechacita2': b });
+    }
+    
+  };
+  
+  
+  const saveDate = () => {
+    if (currentProduct.nombre && currentProduct.dni && currentProduct.fechacita && currentProduct.fechacita2 && currentProduct.hora && currentProduct.categoria2) {
+    
+      var data = {
+        nombre: currentProduct.nombre,
+        dni: currentProduct.dni,
+        fechacita: currentProduct.fechacita,
+        fechacita2: currentProduct.fechacita2,
+        hora: currentProduct.hora,
+        categoria2: currentProduct.categoria2
+      };
+  
+      ProductDataService.createDate(data)
+        .then(response => {
+          setCurrentProduct({
+            id: response.data.id,
+            nombre: response.data.nombre,
+            dni: response.data.dni,
+            fechacita: response.data.fechacita,
+            fechacita2: response.data.fechacita2,
+            hora: response.data.hora,
+            categoria2: response.data.categoria2
+          });
+          //console.log(response.data);
+          //history("/home");
+          alert("Nueva Cita creada con exito!!")
+          setShowNDate(false) // close modal
+          setStartDate(null)
+          setCurrentProduct(initialProductState2) // seteo product
+        })
+        .catch(e => {
+          console.log(e);
+        });
+        
+      }else {
+        alert("Faltan Datos")
+      }
+  };
 
   return (
     <div style={{height: '100vh'}}  className='bgDiv'>
@@ -311,7 +410,7 @@ function Home({ logout }) {
           </Form>
           
           {/* "New" button */}
-          <Button variant="primary" onClick={handleShow} className="mt-3">
+          <Button variant="primary" onClick={handleShow} className="mt-3" title='Nuevo Paciente'>
             <i className="bi bi-plus-circle-fill"></i> Nuevo
           </Button>
           
@@ -345,9 +444,9 @@ function Home({ logout }) {
                         <td className='text-center'>{item.categoria}</td>
                         <td className='text-center'>
                           <div className='d-flex flex-row align-items-baseline justify-content-center'>
-                          <Link to={`/newdate/${item.id}`} title='nueva cita' className='btn btn-primary m-1'>
+                          <Button variant="primary" onClick={() => handle2(item)} className="m-1" title='nueva cita'>
                             <i className="bi bi-plus-circle-fill"></i>
-                          </Link>
+                          </Button>
                           <Link to={`/resumen/dni/${item.dni}`} title='resumen cita' className='btn btn-success'>
                             <i className="bi bi-eye-fill"></i>
                           </Link>
@@ -399,7 +498,7 @@ function Home({ logout }) {
         </Card.Body>
       </Card>
       
-      
+      {/* Modal Nuevo Paciente */}
       <Modal
         show={show}
         onHide={handleClose}
@@ -505,6 +604,123 @@ function Home({ logout }) {
                   Cerrar
                 </Button>
                 <Button variant="primary" onClick={saveProduct}>Registrar</Button>
+              </div>
+              
+            </div>
+      
+          </div>
+          
+        </Modal.Body>
+      </Modal>
+      
+      {/* Modal Nueva Cita */}
+      <Modal
+        show={showNDate}
+        onHide={handleCloseNDate}
+        backdrop="static"
+        keyboard={false}
+        centered
+      >
+        <Modal.Body className="flex1 bgDiv pt-5 pb-5">
+          <h2>Nueva Cita</h2>
+          <p><b>Registrar nueva cita del paciente</b></p>
+          
+          <div className="submit-form">
+            <div className='formFlex'>
+              <div className="form-group mb-3">
+                <label htmlFor="nombre">Nombre</label>
+                <input
+                  type="text"
+                  className="form-control input"
+                  id="nombre"
+                  name="nombre"
+                  value={currentProduct.nombre}
+                  onChange={handleInputChange2}
+                  autoComplete='off'
+                  disabled
+                />
+              </div>
+    
+              <div className="form-group mb-3">
+                <label htmlFor="dni">DNI</label>
+                <input
+                  type="text"
+                  className="form-control input"
+                  id="dni"
+                  name="dni"
+                  value={currentProduct.dni}
+                  onChange={handleInputChange2}
+                  autoComplete='off'
+                  disabled
+                />
+              </div>
+              
+              <div className="form-group mb-3">
+                <label htmlFor="fechacita">Fecha Cita</label>
+                <DatePicker
+                  className="form-control input"
+                  dateFormat="dd/MM/yyyy"
+                  selected={startDate}
+                  placeholderText="--Seleccionar--"
+                  
+                  id="fechacita"
+                  required={true}
+                  value={currentProduct.fechacita}
+                  onChange={date => handleOnChangeDate(date)}
+                  onCalendarClose={handleInputChangeDate2}
+                  name="fecha"
+                  autoComplete='off'
+                  
+                  peekNextMonth
+                  showMonthDropdown
+                  showYearDropdown
+                  dropdownMode="select"
+                  
+                  locale="es"
+                  minDate={new Date()}
+                />
+              </div>
+              
+              
+              <div className="form-group mb-3">
+                <label htmlFor="hora">Hora</label>
+                <select className="form-select input" aria-label="Default select example"
+                  id="hora"
+                  required={true}
+                  value={currentProduct.hora}
+                  onChange={handleInputChange2}
+                  name="hora"
+                >
+                  <option>--Seleccionar--</option>
+                  <option value="09:00">09:00</option>
+                  <option value="10:00">10:00</option>
+                </select>
+              </div>
+              
+              
+              <div className="form-group mb-3">
+                <label htmlFor="categoria2">Servicio / Especialidad</label>
+                <select className="form-select input" aria-label="Default select example"
+                  id="categoria2"
+                  required={true}
+                  value={currentProduct.categoria2}
+                  onChange={handleInputChange2}
+                  name="categoria2"
+                >
+                  <option>--Seleccionar--</option>
+                  {
+                    categorias.map(item => (
+                      <option key={item.id} value={item.nombre}>{item.nombre}</option>
+                    ))
+                  }
+                </select>
+              </div>
+              
+              <div className='mt-5 text-center'>
+                <Button variant="secondary" onClick={handleCloseNDate}>
+                  Cerrar
+                </Button>
+                <Button variant="primary" onClick={saveDate}>Registrar</Button>
               </div>
               
             </div>
