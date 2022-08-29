@@ -78,8 +78,6 @@ function New({logout}) {
   
   const obtenerCategorias = () => {
     // GET request for remote image in node.js
-    //axios.get('http://localhost:3001/api/categories')
-    //axios.get('https://pacientes20-back.herokuapp.com/api/categories')
     ProductDataService.getAll2()
       .then(res => {
         //console.log(res.data);
@@ -159,22 +157,6 @@ function New({logout}) {
                 autoComplete='off'
               />
             </div>
-            
-            {/* <div className="form-group mb-3">
-              <label htmlFor="fecha">Date</label>
-              <input
-                type="text"
-                className="form-control input"
-                id="fecha"
-                required={true}
-                value={product.fecha}
-                onChange={handleInputChange}
-                name="fecha"
-                autoComplete='off'
-              />
-            </div> */}
-            
-            {/* onChange={(date) => setStartDate(date)} */}
             
             <div className="form-group mb-3">
               <label htmlFor="fecha">Fecha Nacimiento</label>
