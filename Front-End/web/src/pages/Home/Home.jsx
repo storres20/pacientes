@@ -344,6 +344,7 @@ function Home({ logout }) {
                         <td className='text-center'>{item.tipo}</td>
                         <td className='text-center'>{item.categoria}</td>
                         <td className='text-center'>
+                          <div className='d-flex flex-row align-items-baseline justify-content-center'>
                           <Link to={`/newdate/${item.id}`} title='nueva cita' className='btn btn-primary m-1'>
                             <i className="bi bi-plus-circle-fill"></i>
                           </Link>
@@ -363,6 +364,7 @@ function Home({ logout }) {
                           >
                             <i className="bi bi-trash-fill"></i>
                           </button>
+                          </div>
                         </td>
                       </tr>
                     ))}
