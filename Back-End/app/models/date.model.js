@@ -137,6 +137,25 @@ Date.remove = (id, result) => {
   });
 };
 
+Date.removeDNI = (id, result) => {
+  sql.query("DELETE FROM cita WHERE id = ?", id, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+
+    if (res.affectedRows == 0) {
+      // not found Product with the id
+      result({ kind: "not_found" }, null);
+      return;
+    }
+
+    console.log("deleted product with id: ", id);
+    result(null, res);
+  });
+};
+
 Date.removeAll = result => {
   sql.query("DELETE FROM products", (err, res) => {
     if (err) {
