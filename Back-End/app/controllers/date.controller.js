@@ -138,6 +138,23 @@ exports.delete = (req, res) => {
   });
 };
 
+// Delete a Product with the specified id in the request
+exports.deleteDNI = (req, res) => {
+  Date.removeDNI(req.params.id, (err, data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `Not found Product with id ${req.params.id}.`
+        });
+      } else {
+        res.status(500).send({
+          message: "Could not delete Product with id " + req.params.id
+        });
+      }
+    } else res.send({ message: `Product was deleted successfully!` });
+  });
+};
+
 // Delete all Products from the database.
 exports.deleteAll = (req, res) => {
   Date.removeAll((err, data) => {
