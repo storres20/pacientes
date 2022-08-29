@@ -64,6 +64,7 @@ function Resumen({ logout }) {
           setLoading(true) // loading
           setNoData(true) // no data
           setRutas([])
+          setAllData("*") // false conditional
         });
         
     }else{
@@ -162,11 +163,12 @@ function Resumen({ logout }) {
   // button delete
   const deleteProduct2 = (id) => {
   
-    if (window.confirm("Desea ELIMINAR el paciente ?") === true) {
-      ProductDataService.remove(id)
+    if (window.confirm("Desea ELIMINAR la CITA ?") === true) {
+      ProductDataService.removeDNI(id)
       .then(response => {
         //console.log(response.data);
-        window.location.reload(true);
+        //window.location.reload(true);
+        obtenerDatos()
       })
       .catch(e => {
         console.log(e);
@@ -190,7 +192,7 @@ function Resumen({ logout }) {
           </Card.Text>
 
           <Card.Title>Paciente:</Card.Title>
-          <Card.Subtitle className="mb-4 text-muted">{allData===[] ? "" : allData[0].nombre }</Card.Subtitle>
+          <Card.Subtitle className="mb-4 text-muted">{allData==="*" ? params.id : allData[0].nombre }</Card.Subtitle>
 
           <Form>
             <Container>
@@ -258,25 +260,22 @@ function Resumen({ logout }) {
                       <td className='text-center'>{item.hora}</td>
                       <td className='text-center'>{item.categoria2}</td>
                       <td className='text-center'>
-                        {/* <Link to={`/newdate/${item.id}`} title='nueva cita' className='btn btn-primary m-1'>
+                        <Link to={`/newdate/${item.id}`} title='nueva cita' className='btn btn-primary m-1'>
                           <i className="bi bi-plus-circle-fill"></i>
-                        </Link>
-                        <Link to={`/newdate/${item.id}`} title='resumen cita' className='btn btn-success'>
-                          <i className="bi bi-eye-fill"></i>
                         </Link>
                         <Link
                           className='btn btn-warning m-1'
                           to={`/edit/${item.id}`}
-                          title='editar paciente'
+                          title='editar cita'
                         >
                           <i className="bi bi-pencil-fill"></i>
                         </Link>
                         <button className="btn btn-danger"
                         onClick={() => deleteProduct2(`${item.id}`)}
-                        title='borrar paciente'
+                        title='borrar cita'
                         >
                           <i className="bi bi-trash-fill"></i>
-                        </button> */}
+                        </button>
                       </td>
                     </tr>
                   ))}
@@ -288,7 +287,7 @@ function Resumen({ logout }) {
               {noData ? (
               
                 <div className='text-center'>
-                  <h2>No data to show</h2>
+                  <h2>No tiene citas programadas</h2>
                 </div>
               
               ) : ("")}
