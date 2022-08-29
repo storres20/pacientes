@@ -147,7 +147,7 @@ function NewDate({logout}) {
   
 
   return (
-    <div className='bgDivNew' style={{height: '100vh'}}>
+    <div className='bgDiv' style={{height: '100vh'}}>
       <NavBar logout={logout} />
       
       <div className="flex1">
