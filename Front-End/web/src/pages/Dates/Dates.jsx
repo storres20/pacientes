@@ -332,7 +332,8 @@ function Dates({ logout }) {
                 {noData ? (
                 
                   <div className='text-center'>
-                    <h2>No data to show</h2>
+                    <h2>No hay pacientes programados.</h2>
+                    <h3>Seleccionar otra fecha</h3>
                   </div>
                 
                 ) : ("")}
