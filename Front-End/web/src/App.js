@@ -8,7 +8,7 @@ import Login from "./pages/Login/Login";
 import Home from "./pages/Home/Home"
 import Dates from './pages/Dates/Dates';
 //import New from './pages/New/New'
-import NewDate from './pages/NewDate/NewDate'
+//import NewDate from './pages/NewDate/NewDate'
 import Resumen from './pages/Resumen/Resumen'
 
 import {Routes, Route, Navigate} from 'react-router-dom'
@@ -44,7 +44,7 @@ function App() {
                 <Route path="/dates" element={<Dates logout={() => setUser(false)} />} />
                 {/* <Route path="/new" element={<New logout={() => setUser(false)} />} /> */}
                 <Route path="/edit/:id" element={<Edit logout={() => setUser(false)} />} />
-                <Route path="/newdate/:id" element={<NewDate logout={() => setUser(false)} />} />
+                {/* <Route path="/newdate/:id" element={<NewDate logout={() => setUser(false)} />} /> */}
                 <Route path="/resumen/dni/:id" element={<Resumen logout={() => setUser(false)} />} />
               </>
             )}
