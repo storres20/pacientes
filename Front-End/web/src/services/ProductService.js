@@ -48,6 +48,11 @@ const remove = id => {
   return http.delete(`/products/${id}`);
 };
 
+// Resumen.jsx
+const removeDNI = id => {
+  return http.delete(`/dates/dni/${id}`);
+};
+
 const removeAll = () => {
   return http.delete(`/products`);
 };
@@ -69,6 +74,7 @@ const ProductDataService = {
   login,
   update,
   remove,
+  removeDNI,
   removeAll,
   findByTitle
 };
