@@ -23,6 +23,9 @@ module.exports = app => {
 
   // Delete a Date with id
   router.delete("/:id", dates.delete);
+  
+  // Delete a Date with id
+  router.delete("/dni/:id", dates.deleteDNI);
 
   // Delete all Dates
   router.delete("/", dates.deleteAll);
