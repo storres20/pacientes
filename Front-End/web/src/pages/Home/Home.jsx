@@ -21,6 +21,15 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
+import Modal from 'react-bootstrap/Modal';
+
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+// datepicker in spanish
+import { registerLocale } from  "react-datepicker";
+import es from 'date-fns/locale/es';
+registerLocale('es', es)
+
 
 function Home({ logout }) {
 
@@ -39,8 +48,6 @@ function Home({ logout }) {
 
   const obtenerDatos = () => {
     // GET request for remote image in node.js
-    //axios.get('http://localhost:3001/api/products')
-    //axios.get('https://pacientes20-back.herokuapp.com/api/products')
     ProductDataService.getAll()
       .then(res => {
         //console.log(res.data);
@@ -54,8 +61,6 @@ function Home({ logout }) {
 
   const obtenerCategorias = () => {
     // GET request for remote image in node.js
-    //axios.get('http://localhost:3001/api/categories')
-    //axios.get('https://pacientes20-back.herokuapp.com/api/categories')
     ProductDataService.getAll2()
       .then(res => {
         //console.log(res.data);
@@ -145,7 +150,8 @@ function Home({ logout }) {
       ProductDataService.remove(id)
       .then(response => {
         //console.log(response.data);
-        window.location.reload(true);
+        //window.location.reload(true);
+        obtenerDatos()
       })
       .catch(e => {
         console.log(e);
@@ -153,6 +159,101 @@ function Home({ logout }) {
     }
     
   };
+  
+  
+  // Modal - Nuevo paciente
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  
+  
+  const initialProductState = {
+    id: null,
+    nombre: "",
+    dni: "",
+    fecha: "",
+    fecha2: "",
+    tipo: "",
+    categoria: ""
+  };
+  
+  const [product, setProduct] = useState(initialProductState);
+
+  const handleInputChange = event => {
+    const { name, value } = event.target;
+    setProduct({ ...product, [name]: value });
+  };
+  
+  
+  const saveProduct = () => {
+  
+    if (product.nombre && product.dni && product.fecha && product.fecha2 && product.tipo && product.categoria) {
+    
+    var data = {
+      nombre: product.nombre,
+      dni: product.dni,
+      fecha: product.fecha,
+      fecha2: product.fecha2,
+      tipo: product.tipo,
+      categoria: product.categoria
+    };
+
+    ProductDataService.create(data)
+      .then(response => {
+        setProduct({
+          id: response.data.id,
+          nombre: response.data.nombre,
+          dni: response.data.dni,
+          fecha: response.data.fecha,
+          fecha2: response.data.fecha2,
+          tipo: response.data.tipo,
+          categoria: response.data.categoria
+        });
+        //console.log(response.data);
+        //history("/home");
+        obtenerDatos() // refresca listado de pacientes
+        alert("Paciente creado con exito!!")
+        setShow(false) // close modal
+        setStartDate(null)
+        setProduct(initialProductState) // seteo product
+      })
+      .catch(e => {
+        console.log(e);
+      });
+      
+    }else {
+      alert("Faltan Datos")
+    }
+  };
+  
+  
+  // Datepicker
+  //const a = new Date()
+  //const b = a.valueOf()
+  
+  const [startDate, setStartDate] = useState(null);
+  
+  
+  const handleInputChangeDate = () => {
+    // startDate to dd/MM/yyyy
+    let current = startDate
+    
+    if (current !== null) {
+      let b = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`
+      
+      //console.log(b) // dd/MM/yyyy
+      
+      setProduct({ ...product, 'fecha': startDate.valueOf(), 'fecha2': b });
+    }
+    
+  };
+  
+  const handleOnChangeDate = (date) => {
+    const a = new Date(date)
+    
+    setStartDate(a)
+  }
 
   return (
     <div style={{height: '100vh'}}  className='bgDiv'>
@@ -210,7 +311,9 @@ function Home({ logout }) {
           </Form>
           
           {/* "New" button */}
-          <Link to={"/new"} title='Nuevo Paciente'><Button variant="primary"><i className="bi bi-plus-circle-fill"></i> Nuevo</Button></Link>
+          <Button variant="primary" onClick={handleShow} className="mt-3">
+            <i className="bi bi-plus-circle-fill"></i> Nuevo
+          </Button>
           
           {loading ? (
           
@@ -293,6 +396,121 @@ function Home({ logout }) {
 
         </Card.Body>
       </Card>
+      
+      
+      <Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+        centered
+      >
+        <Modal.Body className="flex1 bgDiv pt-5 pb-5">
+          <h2>Nuevo Paciente</h2>
+          <p><b>Registrar datos del nuevo paciente</b></p>
+          
+          <div className="submit-form">
+            <div className='formFlex'>
+              <div className="form-group mb-3">
+                <label htmlFor="nombre">Nombre</label>
+                <input
+                  type="text"
+                  className="form-control input"
+                  id="nombre"
+                  required={true}
+                  value={product.nombre}
+                  onChange={handleInputChange}
+                  name="nombre"
+                  autoComplete='off'
+                />
+              </div>
+    
+              <div className="form-group mb-3">
+                <label htmlFor="dni">DNI</label>
+                <input
+                  type="text"
+                  className="form-control input"
+                  id="dni"
+                  required={true}
+                  value={product.dni}
+                  onChange={handleInputChange}
+                  name="dni"
+                  autoComplete='off'
+                />
+              </div>
+              
+              <div className="form-group mb-3">
+                <label htmlFor="fecha">Fecha Nacimiento</label>
+                <DatePicker
+                  className="form-control input"
+                  dateFormat="dd/MM/yyyy"
+                  selected={startDate}
+                  placeholderText="--Seleccionar--"
+                  
+                  id="fecha"
+                  required={true}
+                  value={startDate}
+                  onChange={date => handleOnChangeDate(date)}
+                  onCalendarClose={handleInputChangeDate}
+                  name="fecha"
+                  autoComplete='off'
+                  peekNextMonth
+                  showMonthDropdown
+                  showYearDropdown
+                  dropdownMode="select"
+                  
+                  locale="es"
+                />
+              </div>
+              
+              
+              <div className="form-group mb-3">
+                <label htmlFor="tipo">Sexo</label>
+                <select className="form-select input" aria-label="Default select example"
+                  id="tipo"
+                  required={true}
+                  value={product.tipo}
+                  onChange={handleInputChange}
+                  name="tipo"
+                >
+                  <option>--Seleccionar--</option>
+                  <option value="masculino">masculino</option>
+                  <option value="femenino">femenino</option>
+                </select>
+              </div>
+              
+              
+              <div className="form-group mb-3">
+                <label htmlFor="categoria">Servicio / Especialidad</label>
+                <select className="form-select input" aria-label="Default select example"
+                  id="categoria"
+                  required={true}
+                  value={product.categoria}
+                  onChange={handleInputChange}
+                  name="categoria"
+                >
+                  <option>--Seleccionar--</option>
+                  {
+                    categorias.map(item => (
+                      <option key={item.id} value={item.nombre}>{item.nombre}</option>
+                    ))
+                  }
+                </select>
+              </div>
+              
+              <div className='mt-5 text-center'>
+                <Button variant="secondary" onClick={handleClose}>
+                  Cerrar
+                </Button>
+                <Button variant="primary" onClick={saveProduct}>Registrar</Button>
+              </div>
+              
+            </div>
+      
+          </div>
+          
+        </Modal.Body>
+      </Modal>
 
     </div>
   )
