@@ -267,15 +267,15 @@ function Home({ logout }) {
   // ****************************
   // Modal - Nueva Cita
   const [showNDate, setShowNDate] = useState(false);
-
+  
+  // close modal
   const handleCloseNDate = () => {
     setShowNDate(false)
     setStartDate(null)
     setCurrentProduct(initialProductState2) // seteo product
   };
   
-  
-  const handleShowNDate = () => setShowNDate(true);
+  const handleShowNDate = () => setShowNDate(true); // open modal
   
   const initialProductState2 = {
     id: null,
@@ -289,6 +289,7 @@ function Home({ logout }) {
   
   const [currentProduct, setCurrentProduct] = useState(initialProductState2);
   
+  // button Nueva Cita
   const handle2 = (item) => {
     //console.log(item)
     setCurrentProduct(item)
@@ -314,7 +315,7 @@ function Home({ logout }) {
     
   };
   
-  
+  // Registrar button
   const saveDate = () => {
     if (currentProduct.nombre && currentProduct.dni && currentProduct.fechacita && currentProduct.fechacita2 && currentProduct.hora && currentProduct.categoria2) {
     
