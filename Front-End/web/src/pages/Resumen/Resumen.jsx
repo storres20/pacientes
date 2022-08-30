@@ -41,12 +41,12 @@ function Resumen({ logout }) {
   //console.log(params.id)
   
 
-  const obtenerDatos = () => {
+  const obtenerDatos = (x) => {
     
-    if (params.id !== null) {
+    if (x.id !== null) {
     
       // GET request for remote image in node.js 111222333
-      ProductDataService.getDateDNI(params.id)
+      ProductDataService.getDateDNI(x.id)
         .then(res => {
           //console.log(res.data);
           setRutas(res.data)
@@ -86,9 +86,9 @@ function Resumen({ logout }) {
   }
 
   useEffect(() => {
-    obtenerDatos();
+    obtenerDatos(params);
     obtenerCategorias();
-  }, [])
+  }, [params])
 
 
   const handleSearch = (event) => {
@@ -168,7 +168,7 @@ function Resumen({ logout }) {
       .then(response => {
         //console.log(response.data);
         //window.location.reload(true);
-        obtenerDatos()
+        obtenerDatos(params)
       })
       .catch(e => {
         console.log(e);
