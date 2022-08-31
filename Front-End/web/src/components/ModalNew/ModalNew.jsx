@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react'
 
 import ProductDataService from "../../services/ProductService";
-//import {Link, useNavigate} from 'react-router-dom';
 
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
@@ -19,6 +18,22 @@ registerLocale('es', es)
 
 
 function ModalNew({show, closeShow, saveShow}) {
+  
+  // ********************************
+  // setting product
+  
+  const initialProductState = {
+    id: null,
+    nombre: "",
+    dni: "",
+    fecha: "",
+    fecha2: "",
+    tipo: "",
+    categoria: ""
+  };
+  
+  const [product, setProduct] = useState(initialProductState);
+  
   
   // ****************************
   // Categories
@@ -50,26 +65,9 @@ function ModalNew({show, closeShow, saveShow}) {
   };
   
   
-  const initialProductState = {
-    id: null,
-    nombre: "",
-    dni: "",
-    fecha: "",
-    fecha2: "",
-    tipo: "",
-    categoria: ""
-  };
-  
-  const [product, setProduct] = useState(initialProductState);
-
-  const handleInputChange = event => {
-    const { name, value } = event.target;
-    setProduct({ ...product, [name]: value });
-  };
-  
-  
   // *******************************************
   // save data after click on "Registrar" button
+  
   const saveProduct = () => {
   
     if (product.nombre && product.dni && product.fecha && product.fecha2 && product.tipo && product.categoria) {
@@ -117,6 +115,24 @@ function ModalNew({show, closeShow, saveShow}) {
   
   const [startDate, setStartDate] = useState(null);
   
+  const handleOnChangeDate = (date) => {
+    const a = new Date(date)
+    
+    setStartDate(a)
+  }
+  
+  
+  // ****************************************
+  // UPDATE currentProduct with INPUT's value
+
+  const handleInputChange = event => {
+    const { name, value } = event.target;
+    setProduct({ ...product, [name]: value });
+  };
+  
+  
+  // ****************************************
+  // UPDATE currentProduct with Datepicker
   
   const handleInputChangeDate = () => {
     // startDate to dd/MM/yyyy
@@ -132,15 +148,7 @@ function ModalNew({show, closeShow, saveShow}) {
     
   };
   
-  const handleOnChangeDate = (date) => {
-    const a = new Date(date)
-    
-    setStartDate(a)
-  }
   
-  // **********************************
-  
-
   return (
     <div>
       {/* Modal Nuevo Paciente */}

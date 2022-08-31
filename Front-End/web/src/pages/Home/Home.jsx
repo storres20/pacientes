@@ -22,8 +22,9 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 // Import Modal components
-import ModalNew from '../ModalNew/ModalNew'
-import ModalNewDate from '../ModalNewDate/ModalNewDate'
+import ModalNew from '../../components/ModalNew/ModalNew'
+import ModalNewDate from '../../components/ModalNewDate/ModalNewDate'
+import ModalEdit from '../../components/ModalEdit/ModalEdit'
 
 
 function Home({ logout }) {
@@ -204,6 +205,25 @@ function Home({ logout }) {
     obtenerDatos()
   }
   
+  
+  // ********************************
+  // Modal - Editar Paciente
+  
+  const [showE, setShowE] = useState(false);
+  const handleShowE = (x) => {
+    setShowE(true)
+    setList(x) // date list
+  };
+  
+  const closeEdit = (value) => {
+    setShowE(value)
+  }
+  
+  const saveEdit = (value) => {
+    setShowE(value)
+    obtenerDatos()
+  }
+  
 
   return (
     <div style={{height: '100vh'}}  className='bgDiv'>
@@ -295,25 +315,26 @@ function Home({ logout }) {
                         <td className='text-center'>{item.categoria}</td>
                         <td className='text-center'>
                           <div className='d-flex flex-row align-items-baseline justify-content-center'>
-                          <Button variant="primary" onClick={() => handleShowD(item)} className="m-1" title='nueva cita'>
-                            <i className="bi bi-plus-circle-fill"></i>
-                          </Button>
-                          <Link to={`/resumen/dni/${item.dni}`} title='resumen cita' className='btn btn-success'>
-                            <i className="bi bi-eye-fill"></i>
-                          </Link>
-                          <Link
-                            className='btn btn-warning m-1'
-                            to={`/edit/${item.id}`}
-                            title='editar paciente'
-                          >
-                            <i className="bi bi-pencil-fill"></i>
-                          </Link>
-                          <button className="btn btn-danger"
-                          onClick={() => deleteProduct2(`${item.id}`)}
-                          title='borrar paciente'
-                          >
-                            <i className="bi bi-trash-fill"></i>
-                          </button>
+                          
+                            <Button variant="primary" onClick={() => handleShowD(item)} className="m-1" title='nueva cita'>
+                              <i className="bi bi-plus-circle-fill"></i>
+                            </Button>
+                            
+                            <Link to={`/resumen/dni/${item.dni}`} title='resumen cita' className='btn btn-success'>
+                              <i className="bi bi-eye-fill"></i>
+                            </Link>
+                            
+                            <Button variant="warning" onClick={() => handleShowE(item)} className="m-1" title='editar paciente'>
+                              <i className="bi bi-pencil-fill"></i>
+                            </Button>
+                            
+                            <Button variant="danger"
+                            onClick={() => deleteProduct2(`${item.id}`)}
+                            title='borrar paciente'
+                            >
+                              <i className="bi bi-trash-fill"></i>
+                            </Button>
+                          
                           </div>
                         </td>
                       </tr>
@@ -354,6 +375,9 @@ function Home({ logout }) {
       
       {/* Modal Nueva Cita */}
       <ModalNewDate show={showD} closeShow={(value) => closeNewD(value)} saveShow={(value) => saveNewD(value)} list={list} />
+      
+      {/* Modal Editar Paciente */}
+      <ModalEdit show={showE} closeShow={(value) => closeEdit(value)} saveShow={(value) => saveEdit(value)} list={list} />
 
     </div>
   )

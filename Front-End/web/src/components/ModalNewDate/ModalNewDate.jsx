@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react'
 
 import ProductDataService from "../../services/ProductService";
-//import {Link, useNavigate} from 'react-router-dom';
 
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
@@ -21,6 +20,26 @@ registerLocale('es', es)
 function ModalNewDate({show, closeShow, saveShow, list}) {
   
   //console.log(list)
+  
+  // ********************************
+  // setting currentProduct
+  
+  const initialProductState2 = {
+    id: null,
+    nombre: "",
+    dni: "",
+    fechacita: "",
+    fechacita2: "",
+    hora: "",
+    categoria2: ""
+  };
+  
+  const [currentProduct, setCurrentProduct] = useState(initialProductState2);
+  
+  // set currentProduct with "nombre" and "dni"
+  currentProduct.nombre = list.nombre
+  currentProduct.dni = list.dni
+  
   
   // ****************************
   // Categories
@@ -53,23 +72,6 @@ function ModalNewDate({show, closeShow, saveShow, list}) {
   };
   
   
-  const initialProductState2 = {
-    id: null,
-    nombre: "",
-    dni: "",
-    fechacita: "",
-    fechacita2: "",
-    hora: "",
-    categoria2: ""
-  };
-  
-  const [currentProduct, setCurrentProduct] = useState(initialProductState2);
-  
-  // set currentProduct with "nombre" and "dni"
-  currentProduct.nombre = list.nombre
-  currentProduct.dni = list.dni
-  
-  
   // ********************************
   // Datepicker
   //const a = new Date()
@@ -77,16 +79,24 @@ function ModalNewDate({show, closeShow, saveShow, list}) {
   
   const [startDate, setStartDate] = useState(null);
   
-  const handleInputChange2 = event => {
-    const { name, value } = event.target;
-    setCurrentProduct({ ...currentProduct, [name]: value });
-  };
-  
   const handleOnChangeDate = (date) => {
     const a = new Date(date)
     
     setStartDate(a)
   }
+  
+  
+  // ****************************************
+  // UPDATE currentProduct with INPUT's value
+  
+  const handleInputChange2 = event => {
+    const { name, value } = event.target;
+    setCurrentProduct({ ...currentProduct, [name]: value });
+  };
+  
+  
+  // ****************************************
+  // UPDATE currentProduct with Datepicker
   
   const handleInputChangeDate2 = () => {
     // startDate to dd/MM/yyyy
