@@ -1,0 +1,41 @@
+.bgDivNew {
+  //background: rgb(238,174,202);
+  //background: linear-gradient(90deg, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+  background: rgb(238,174,202);
+  background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+}
+
+.flex1 {
+  padding: 16px;
+  text-align: center;
+}
+
+.formFlex {
+  width: auto;
+}
+
+.divTable {
+  width: 90vw;
+}
+
+/* Escritorio grande */
+@media only screen and (min-width: 768px){
+  .input {
+    width: 400px;
+  }
+  
+  .flex1 {
+    display: flex;
+    flex-direction: column;
+    
+    align-items: center;
+  }
+  
+  .formFlex {
+    width: 400px;
+  }
+  
+  
+}
+
+
