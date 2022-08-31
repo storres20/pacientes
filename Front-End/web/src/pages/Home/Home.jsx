@@ -22,9 +22,9 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 // Import Modal components
-import ModalNew from '../ModalNew/ModalNew'
-import ModalNewDate from '../ModalNewDate/ModalNewDate'
-import ModalEdit from '../ModalEdit/ModalEdit'
+import ModalNew from '../../components/ModalNew/ModalNew'
+import ModalNewDate from '../../components/ModalNewDate/ModalNewDate'
+import ModalEdit from '../../components/ModalEdit/ModalEdit'
 
 
 function Home({ logout }) {
