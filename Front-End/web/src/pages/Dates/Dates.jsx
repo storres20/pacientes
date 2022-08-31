@@ -302,24 +302,26 @@ function Dates({ logout }) {
                         <td className='text-center'>{item.hora}</td>
                         <td className='text-center'>{item.categoria2}</td>
                         <td className='text-center'>
-                          <Link to={"#"} title='nueva cita' className='btn btn-primary m-1'>
-                            <i className="bi bi-plus-circle-fill"></i>
-                          </Link>
-                          <Link to={"#"} title='resumen cita' className='btn btn-success'>
-                            <i className="bi bi-eye-fill"></i>
-                          </Link>
-                          <Link
-                            className='btn btn-warning m-1'
-                            to={"#"}
-                            title='editar paciente'
-                          >
-                            <i className="bi bi-pencil-fill"></i>
-                          </Link>
-                          <button className="btn btn-danger"
-                          title='borrar paciente'
-                          >
-                            <i className="bi bi-trash-fill"></i>
-                          </button>
+                          <div className='d-flex flex-row align-items-baseline justify-content-center'>
+                            <Link to={"#"} title='nueva cita' className='btn btn-primary m-1'>
+                              <i className="bi bi-plus-circle-fill"></i>
+                            </Link>
+                            <Link to={"#"} title='resumen cita' className='btn btn-success'>
+                              <i className="bi bi-eye-fill"></i>
+                            </Link>
+                            <Link
+                              className='btn btn-warning m-1'
+                              to={"#"}
+                              title='editar paciente'
+                            >
+                              <i className="bi bi-pencil-fill"></i>
+                            </Link>
+                            <button className="btn btn-danger"
+                            title='borrar paciente'
+                            >
+                              <i className="bi bi-trash-fill"></i>
+                            </button>
+                          </div>
                         </td>
                       </tr>
                     ))}
