@@ -315,28 +315,26 @@ function Home({ logout }) {
                         <td className='text-center'>{item.categoria}</td>
                         <td className='text-center'>
                           <div className='d-flex flex-row align-items-baseline justify-content-center'>
-                          <Button variant="primary" onClick={() => handleShowD(item)} className="m-1" title='nueva cita'>
-                            <i className="bi bi-plus-circle-fill"></i>
-                          </Button>
-                          <Link to={`/resumen/dni/${item.dni}`} title='resumen cita' className='btn btn-success'>
-                            <i className="bi bi-eye-fill"></i>
-                          </Link>
-                          <Button variant="warning" onClick={() => handleShowE(item)} className="m-1" title='editar paciente'>
-                            <i className="bi bi-pencil-fill"></i>
-                          </Button>
-                          <Link
-                            className='btn btn-warning m-1'
-                            to={`/edit/${item.id}`}
-                            title='editar paciente'
-                          >
-                            <i className="bi bi-pencil-fill"></i>
-                          </Link>
-                          <button className="btn btn-danger"
-                          onClick={() => deleteProduct2(`${item.id}`)}
-                          title='borrar paciente'
-                          >
-                            <i className="bi bi-trash-fill"></i>
-                          </button>
+                          
+                            <Button variant="primary" onClick={() => handleShowD(item)} className="m-1" title='nueva cita'>
+                              <i className="bi bi-plus-circle-fill"></i>
+                            </Button>
+                            
+                            <Link to={`/resumen/dni/${item.dni}`} title='resumen cita' className='btn btn-success'>
+                              <i className="bi bi-eye-fill"></i>
+                            </Link>
+                            
+                            <Button variant="warning" onClick={() => handleShowE(item)} className="m-1" title='editar paciente'>
+                              <i className="bi bi-pencil-fill"></i>
+                            </Button>
+                            
+                            <Button variant="danger"
+                            onClick={() => deleteProduct2(`${item.id}`)}
+                            title='borrar paciente'
+                            >
+                              <i className="bi bi-trash-fill"></i>
+                            </Button>
+                          
                           </div>
                         </td>
                       </tr>
