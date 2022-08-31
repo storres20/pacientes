@@ -76,7 +76,9 @@ function ModalEdit({show, closeShow, saveShow, list}) {
   
   
   useEffect(() => {
-    getProduct(list.id);
+    if (list !== false) {
+      getProduct(list.id);
+    }
   }, [list]);
   
   
@@ -87,7 +89,7 @@ function ModalEdit({show, closeShow, saveShow, list}) {
   const handleClose = () => {
     //setShowNDate(false)
     setStartDate(null)
-    setCurrentProduct(initialProductState) // set product
+    //setCurrentProduct(initialProductState) // set product
     closeShow(false); // close modal
   };
   
