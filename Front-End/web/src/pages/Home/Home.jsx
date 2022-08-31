@@ -204,6 +204,25 @@ function Home({ logout }) {
     obtenerDatos()
   }
   
+  
+  // ********************************
+  // Modal - Editar Paciente
+  
+  const [showE, setShowE] = useState(false);
+  const handleShowE = (x) => {
+    setShowE(true)
+    setList(x) // date list
+  };
+  
+  const closeEdit = (value) => {
+    setShowE(value)
+  }
+  
+  const saveEdit = (value) => {
+    setShowE(value)
+    obtenerDatos()
+  }
+  
 
   return (
     <div style={{height: '100vh'}}  className='bgDiv'>
@@ -301,6 +320,9 @@ function Home({ logout }) {
                           <Link to={`/resumen/dni/${item.dni}`} title='resumen cita' className='btn btn-success'>
                             <i className="bi bi-eye-fill"></i>
                           </Link>
+                          <Button variant="warning" onClick={() => handleShowE(item)} className="m-1" title='editar paciente'>
+                            <i className="bi bi-pencil-fill"></i>
+                          </Button>
                           <Link
                             className='btn btn-warning m-1'
                             to={`/edit/${item.id}`}
