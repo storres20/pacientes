@@ -4,8 +4,6 @@ import NavBar from '../../components/NavBar/NavBar'
 import Pagina from '../../components/Pagina/Pagina'
 import ProductDataService from "../../services/ProductService"
 
-import {Link} from 'react-router-dom'
-
 import './Home.scss'
 //import './Loading.scss'
 
@@ -25,6 +23,7 @@ import Col from 'react-bootstrap/Col';
 import ModalNew from '../../components/ModalNew/ModalNew'
 import ModalNewDate from '../../components/ModalNewDate/ModalNewDate'
 import ModalEdit from '../../components/ModalEdit/ModalEdit'
+import ModalResumen from '../../components/ModalResumen/ModalResumen'
 
 
 function Home({ logout }) {
@@ -169,6 +168,11 @@ function Home({ logout }) {
   };
   
   
+  // ******************
+  // new date list
+  const [list, setList] = useState(false) // contain patient's data to create new date
+  
+  
   // ****************************
   // Modal - Nuevo paciente
   const [show, setShow] = useState(false);
@@ -186,9 +190,6 @@ function Home({ logout }) {
   
   // ********************************
   // Modal - Nueva Cita
-  
-  // new date list
-  const [list, setList] = useState(false) // contain patient's data to create new date
   
   const [showD, setShowD] = useState(false);
   const handleShowD = (x) => {
@@ -222,6 +223,20 @@ function Home({ logout }) {
   const saveEdit = (value) => {
     setShowE(value)
     obtenerDatos()
+  }
+  
+  
+  // ********************************
+  // Modal - Resumen
+  
+  const [showR, setShowR] = useState(false);
+  const handleShowR = (x) => {
+    setShowR(true)
+    setList(x) // date list
+  };
+  
+  const closeResumen = (value) => {
+    setShowR(value)
   }
   
 
@@ -320,9 +335,9 @@ function Home({ logout }) {
                               <i className="bi bi-plus-circle-fill"></i>
                             </Button>
                             
-                            <Link to={`/resumen/dni/${item.dni}`} title='resumen cita' className='btn btn-success'>
+                            <Button variant="success" onClick={() => handleShowR(item)} title='resumen cita'>
                               <i className="bi bi-eye-fill"></i>
-                            </Link>
+                            </Button>
                             
                             <Button variant="warning" onClick={() => handleShowE(item)} className="m-1" title='editar paciente'>
                               <i className="bi bi-pencil-fill"></i>
@@ -378,6 +393,9 @@ function Home({ logout }) {
       
       {/* Modal Editar Paciente */}
       <ModalEdit show={showE} closeShow={(value) => closeEdit(value)} saveShow={(value) => saveEdit(value)} list={list} />
+      
+      {/* Modal Resumen */}
+      <ModalResumen show={showR} closeShow={(value) => closeResumen(value)} list={list} />
 
     </div>
   )
