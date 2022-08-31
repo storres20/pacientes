@@ -260,18 +260,17 @@ function Resumen({ logout }) {
                       <td className='text-center'>{item.hora}</td>
                       <td className='text-center'>{item.categoria2}</td>
                       <td className='text-center'>
-                        <Link to={`/newdate/${item.id}`} title='nueva cita' className='btn btn-primary m-1'>
+                        <Link to={"#"} title='nueva cita' className='btn btn-primary m-1'>
                           <i className="bi bi-plus-circle-fill"></i>
                         </Link>
                         <Link
                           className='btn btn-warning m-1'
-                          to={`/edit/${item.id}`}
+                          to={"#"}
                           title='editar cita'
                         >
                           <i className="bi bi-pencil-fill"></i>
                         </Link>
                         <button className="btn btn-danger"
-                        onClick={() => deleteProduct2(`${item.id}`)}
                         title='borrar cita'
                         >
                           <i className="bi bi-trash-fill"></i>
