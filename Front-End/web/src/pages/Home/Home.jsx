@@ -24,6 +24,7 @@ import Col from 'react-bootstrap/Col';
 // Import Modal components
 import ModalNew from '../ModalNew/ModalNew'
 import ModalNewDate from '../ModalNewDate/ModalNewDate'
+import ModalEdit from '../ModalEdit/ModalEdit'
 
 
 function Home({ logout }) {
@@ -376,6 +377,9 @@ function Home({ logout }) {
       
       {/* Modal Nueva Cita */}
       <ModalNewDate show={showD} closeShow={(value) => closeNewD(value)} saveShow={(value) => saveNewD(value)} list={list} />
+      
+      {/* Modal Editar Paciente */}
+      <ModalEdit show={showE} closeShow={(value) => closeEdit(value)} saveShow={(value) => saveEdit(value)} list={list} />
 
     </div>
   )
