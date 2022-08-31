@@ -47,11 +47,11 @@ function Dates({ logout }) {
   
   
 
-  const obtenerDatos = () => {
+  const obtenerDatos = (x) => {
     
-    if (startDate !== null) {
+    if (x !== null) {
     
-      let fecha = startDate.valueOf();
+      let fecha = x.valueOf();
       //console.log(fecha)
       // GET request for remote image in node.js 1662742735000
       ProductDataService.getDate(fecha)
@@ -93,9 +93,9 @@ function Dates({ logout }) {
   }
 
   useEffect(() => {
-    obtenerDatos();
+    obtenerDatos(startDate);
     obtenerCategorias();
-  }, [])
+  }, [startDate])
 
 
   const handleSearch = (event) => {
@@ -220,7 +220,7 @@ function Dates({ logout }) {
                 required={true}
                 value={startDate}
                 onChange={date => handleOnChangeDate(date)}
-                onCalendarClose={obtenerDatos}
+                onCalendarClose={() => obtenerDatos(startDate)}
                 //onChange={(date) => setStartDate(date)}
                 name="fecha"
                 autoComplete='off'
@@ -302,7 +302,7 @@ function Dates({ logout }) {
                         <td className='text-center'>{item.hora}</td>
                         <td className='text-center'>{item.categoria2}</td>
                         <td className='text-center'>
-                          {/* <Link to={`/newdate/${item.id}`} title='nueva cita' className='btn btn-primary m-1'>
+                          <Link to={`/newdate/${item.id}`} title='nueva cita' className='btn btn-primary m-1'>
                             <i className="bi bi-plus-circle-fill"></i>
                           </Link>
                           <Link to={`/newdate/${item.id}`} title='resumen cita' className='btn btn-success'>
@@ -320,7 +320,7 @@ function Dates({ logout }) {
                           title='borrar paciente'
                           >
                             <i className="bi bi-trash-fill"></i>
-                          </button> */}
+                          </button>
                         </td>
                       </tr>
                     ))}
