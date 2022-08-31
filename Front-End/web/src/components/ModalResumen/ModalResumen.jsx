@@ -221,7 +221,7 @@ function ModalResumen({show, closeShow, list}) {
       >
         <Modal.Body className="flex1 bgDiv pt-5 pb-5">
           <h2>Resumen de Citas</h2>
-          <p><b>Permite visualizar todas las citas del paciente</b></p>
+          <p className='text-center'><b>Permite visualizar todas las citas del paciente</b></p>
           
           {loading ? (
           <>
