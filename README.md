@@ -6,9 +6,12 @@
 ## Tabla de contenidos:
 ---
 
+- [Tabla de contenidos:](#tabla-de-contenidos)
 - [Descripción y contexto](#descripción-y-contexto)
 - [Guía de usuario](#guía-de-usuario)
 - [Información adicional](#información-adicional)
+  - [🔭Skils:](#skils)
+  - [💻Pagina web: 📱](#pagina-web-)
 
 
 ## Descripción y contexto
@@ -45,5 +48,5 @@ Tecnologias utilizadas
 ### 💻Pagina web: 📱
 <ul>
 <li> Frontend: <a href="https://pacientes20.netlify.app/" target="_blank">https://pacientes20.netlify.app/</a> </li>
-<li> Backend: <a href="https://pacientes20-back.herokuapp.com/" target="_blank">https://pacientes20-back.herokuapp.com/</a> </li>
+<li> Backend: <a href="https://pacientes20-back.vercel.app/" target="_blank">https://pacientes20-back.vercel.app/</a> </li>
 </ul>
