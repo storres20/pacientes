@@ -1,0 +1,25 @@
+.bgDiv3 {
+  //background: rgb(238,174,202);
+  //background: linear-gradient(90deg, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+  background: rgb(255,228,122);
+  background: linear-gradient(90deg, rgba(255,228,122,.8) 0%, rgba(61,126,170,.8) 100%); 
+}
+
+.label {
+  margin: auto;
+  padding-left: 20px;
+  
+}
+
+.input2 {
+  width: 150px !important;
+}
+
+
+/* Teléfonos */
+@media only screen and (max-width: 575px){
+  .flexCol {
+    display: flex;
+    flex-direction: column;
+  }
+}

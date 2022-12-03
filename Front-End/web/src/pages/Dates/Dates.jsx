@@ -4,10 +4,12 @@ import NavBar from '../../components/NavBar/NavBar'
 import Pagina from '../../components/Pagina/Pagina'
 import ProductDataService from "../../services/ProductService"
 
-import './Home.scss'
+import {Link} from 'react-router-dom'
+
+import './Dates.scss'
 //import './Loading.scss'
 
-import Button from 'react-bootstrap/Button';
+//import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
 import Form from 'react-bootstrap/Form';
@@ -19,23 +21,22 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-// Import Modal components
-import ModalNew from '../../components/ModalNew/ModalNew'
-import ModalNewDate from '../../components/ModalNewDate/ModalNewDate'
-import ModalEdit from '../../components/ModalEdit/ModalEdit'
-import ModalResumen from '../../components/ModalResumen/ModalResumen'
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+// datepicker in spanish
+import { registerLocale } from  "react-datepicker";
+import es from 'date-fns/locale/es';
+registerLocale('es', es)
 
 
-function Home({ logout }) {
-  
-  // ********************************************
-  // useState
-  
+function Dates({ logout }) {
+
   const [rutas, setRutas] = useState([]);
   const [allData, setAllData] = useState([]);
   const [categorias, setCategorias] = useState([]); // list category
   const [loading, setLoading] = useState(false) // loading
   const [noData, setNoData] = useState(false)  // noData
+  const [startDate, setStartDate] = useState(null);
   
   // pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -43,21 +44,43 @@ function Home({ logout }) {
 
   const inputRef = useRef(null);
   const inputRef2 = useRef(null);
+  
+  
 
-  // *************************************
-  // Load Data
-
-  const obtenerDatos = () => {
-    // GET request for remote image in node.js
-    ProductDataService.getAll()
-      .then(res => {
-        //console.log(res.data);
-        setRutas(res.data)
-        setAllData(res.data)
+  const obtenerDatos = (x) => {
+    
+    if (x !== null) {
+    
+      let fecha = x.valueOf();
+      //console.log(fecha)
+      // GET request for remote image in node.js 1662742735000
+      ProductDataService.getDate(fecha)
+        .then(res => {
+          //console.log(res.data);
+          setRutas(res.data)
+          setAllData(res.data)
+          
+          setLoading(true) // loading
+          //console.log(res)
+          if (res.length === 0) {
+            setNoData(true) // no data
+          }
+          else setNoData(false)
+          
+        })
+        .catch(e => {
+          setLoading(true) // loading
+          setNoData(true) // no data
+          setRutas([])
+        });
         
-        setLoading(true) // loading
-        
-      })
+    }else{
+    
+      setLoading(true) // loading
+      setNoData(true) // no data
+    
+    }
+      
   }
 
   const obtenerCategorias = () => {
@@ -70,14 +93,11 @@ function Home({ logout }) {
   }
 
   useEffect(() => {
-    obtenerDatos();
+    obtenerDatos(startDate);
     obtenerCategorias();
-  }, [])
+  }, [startDate])
 
 
-  // *************************************
-  // Filter data - input and input select
-  
   const handleSearch = (event) => {
     const keyword = event.target.value;
 
@@ -113,7 +133,7 @@ function Home({ logout }) {
     if (keyword !== '--Todos--') {
       const results = allData.filter((user) => {
         //return user.title.toLowerCase().startsWith(keyword.toLowerCase());
-        return user.categoria.toLowerCase().includes(keyword.toLowerCase());
+        return user.categoria2.toLowerCase().includes(keyword.toLowerCase());
         // Use the toLowerCase() method to make it case-insensitive
       });
 
@@ -136,8 +156,6 @@ function Home({ logout }) {
   }
   
   
-  // *******************************************************
-  // Pagination
   // Get current posts
   const indexOfLastPost = currentPage * postsPerPage
   const indexOfFirstPost = indexOfLastPost - postsPerPage
@@ -149,7 +167,6 @@ function Home({ logout }) {
   const paginate = (pageNumber) => setCurrentPage(pageNumber)
   
   
-  // **********************************
   // button delete
   const deleteProduct2 = (id) => {
   
@@ -157,8 +174,7 @@ function Home({ logout }) {
       ProductDataService.remove(id)
       .then(response => {
         //console.log(response.data);
-        //window.location.reload(true);
-        obtenerDatos()
+        window.location.reload(true);
       })
       .catch(e => {
         console.log(e);
@@ -168,77 +184,15 @@ function Home({ logout }) {
   };
   
   
-  // ******************
-  // new date list
-  const [list, setList] = useState(false) // contain patient's data to create new date
-  
-  
-  // ****************************
-  // Modal - Nuevo paciente
-  const [show, setShow] = useState(false);
-  const handleShow = () => {setShow(true)};
-  
-  const closeNew = (value) => {
-    setShow(value)
+  const handleOnChangeDate = (date) => {
+    const a = new Date(date)
+    //console.log(a.valueOf())
+    
+    setStartDate(a)
+    
+    
   }
-  
-  const saveNew = (value) => {
-    setShow(value)
-    obtenerDatos()
-  }
-  
-  
-  // ********************************
-  // Modal - Nueva Cita
-  
-  const [showD, setShowD] = useState(false);
-  const handleShowD = (x) => {
-    setShowD(true)
-    setList(x) // date list
-  };
-  
-  const closeNewD = (value) => {
-    setShowD(value)
-  }
-  
-  const saveNewD = (value) => {
-    setShowD(value)
-    obtenerDatos()
-  }
-  
-  
-  // ********************************
-  // Modal - Editar Paciente
-  
-  const [showE, setShowE] = useState(false);
-  const handleShowE = (x) => {
-    setShowE(true)
-    setList(x) // date list
-  };
-  
-  const closeEdit = (value) => {
-    setShowE(value)
-  }
-  
-  const saveEdit = (value) => {
-    setShowE(value)
-    obtenerDatos()
-  }
-  
-  
-  // ********************************
-  // Modal - Resumen
-  
-  const [showR, setShowR] = useState(false);
-  const handleShowR = (x) => {
-    setShowR(true)
-    setList(x) // date list
-  };
-  
-  const closeResumen = (value) => {
-    setShowR(value)
-  }
-  
+
 
   return (
     <div style={{height: '100vh'}}  className='bgDiv'>
@@ -246,16 +200,37 @@ function Home({ logout }) {
 
       <Card className='bgDiv'>
         <Card.Body>
-          <Card.Title><h1>Bienvenido</h1></Card.Title>
+          <Card.Title><h1>Citas</h1></Card.Title>
           <Card.Text>
-          Este sistema le permite visualizar el listado de pacientes
+          Esta página le permite visualizar los <b>pacientes citados</b> según la <b>fecha del calendario</b>
           </Card.Text>
 
           <Card.Title>Listado:</Card.Title>
           
           <InputGroup className="mt-3 mb-3">
-            <InputGroup.Text id="basic-addon1">Total de pacientes:</InputGroup.Text>
-            <Form.Label className="label"><span>{allData.length}</span></Form.Label>
+            <InputGroup.Text id="basic-addon1">Fecha de Cita:</InputGroup.Text>
+            <DatePicker
+                className="form-control"
+                wrapperClassName='input2'
+                dateFormat="dd/MM/yyyy"
+                selected={startDate}
+                placeholderText="--Seleccionar--"
+                
+                id="fecha"
+                required={true}
+                value={startDate}
+                onChange={date => handleOnChangeDate(date)}
+                onCalendarClose={() => obtenerDatos(startDate)}
+                //onChange={(date) => setStartDate(date)}
+                name="fecha"
+                autoComplete='off'
+                peekNextMonth
+                showMonthDropdown
+                showYearDropdown
+                dropdownMode="select"
+                
+                locale="es"
+              />
           </InputGroup>
 
 
@@ -296,9 +271,7 @@ function Home({ logout }) {
           </Form>
           
           {/* "New" button */}
-          <Button variant="primary" onClick={handleShow} className="mt-3" title='Nuevo Paciente'>
-            <i className="bi bi-plus-circle-fill"></i> Nuevo
-          </Button>
+          {/* <Link to={"/new"} title='Nuevo Paciente'><Button variant="primary"><i className="bi bi-plus-circle"></i> Nuevo</Button></Link> */}
           
           {loading ? (
           
@@ -313,8 +286,8 @@ function Home({ logout }) {
                       <th className='text-center'>N°</th>
                       <th>Nombre</th>
                       <th className='text-center'>DNI</th>
-                      <th className='text-center'>Fecha Nacimiento</th>
-                      <th className='text-center'>Sexo</th>
+                      <th className='text-center'>Fecha de Cita</th>
+                      <th className='text-center'>Hora</th>
                       <th className='text-center'>Servicio / Especialidad</th>
                       <th className='text-center'>Accion</th>
                     </tr>
@@ -325,31 +298,29 @@ function Home({ logout }) {
                         <td className='text-center'>{index+1}</td>
                         <td>{item.nombre}</td>
                         <td className='text-center'>{item.dni}</td>
-                        <td className='text-center'>{item.fecha2}</td>
-                        <td className='text-center'>{item.tipo}</td>
-                        <td className='text-center'>{item.categoria}</td>
+                        <td className='text-center'>{item.fechacita2}</td>
+                        <td className='text-center'>{item.hora}</td>
+                        <td className='text-center'>{item.categoria2}</td>
                         <td className='text-center'>
                           <div className='d-flex flex-row align-items-baseline justify-content-center'>
-                          
-                            <Button variant="primary" onClick={() => handleShowD(item)} className="m-1" title='nueva cita'>
+                            <Link to={"#"} title='nueva cita' className='btn btn-primary m-1'>
                               <i className="bi bi-plus-circle-fill"></i>
-                            </Button>
-                            
-                            <Button variant="success" onClick={() => handleShowR(item)} title='resumen cita'>
+                            </Link>
+                            <Link to={"#"} title='resumen cita' className='btn btn-success'>
                               <i className="bi bi-eye-fill"></i>
-                            </Button>
-                            
-                            <Button variant="warning" onClick={() => handleShowE(item)} className="m-1" title='editar paciente'>
+                            </Link>
+                            <Link
+                              className='btn btn-warning m-1'
+                              to={"#"}
+                              title='editar paciente'
+                            >
                               <i className="bi bi-pencil-fill"></i>
-                            </Button>
-                            
-                            <Button variant="danger"
-                            onClick={() => deleteProduct2(`${item.id}`)}
+                            </Link>
+                            <button className="btn btn-danger"
                             title='borrar paciente'
                             >
                               <i className="bi bi-trash-fill"></i>
-                            </Button>
-                          
+                            </button>
                           </div>
                         </td>
                       </tr>
@@ -362,7 +333,8 @@ function Home({ logout }) {
                 {noData ? (
                 
                   <div className='text-center'>
-                    <h2>No data to show</h2>
+                    <h2>No hay pacientes programados.</h2>
+                    <h3>Seleccionar otra fecha</h3>
                   </div>
                 
                 ) : ("")}
@@ -384,21 +356,9 @@ function Home({ logout }) {
 
         </Card.Body>
       </Card>
-      
-      {/* Modal Nuevo Paciente */}
-      <ModalNew show={show} closeShow={(value) => closeNew(value)} saveShow={(value) => saveNew(value)} />
-      
-      {/* Modal Nueva Cita */}
-      <ModalNewDate show={showD} closeShow={(value) => closeNewD(value)} saveShow={(value) => saveNewD(value)} list={list} />
-      
-      {/* Modal Editar Paciente */}
-      <ModalEdit show={showE} closeShow={(value) => closeEdit(value)} saveShow={(value) => saveEdit(value)} list={list} />
-      
-      {/* Modal Resumen */}
-      <ModalResumen show={showR} closeShow={(value) => closeResumen(value)} list={list} />
 
     </div>
   )
 }
 
-export default Home
+export default Dates

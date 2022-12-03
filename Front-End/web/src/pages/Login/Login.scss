@@ -56,6 +56,7 @@
 }
 
 .LoginCard{
+  //min-width: 300px;
   width: 400px;
 }
 
@@ -64,5 +65,12 @@
 @media only screen and (max-width: 575px){
   .App-header > h1 {
     text-align: center;
+  }
+  
+  h2 {
+  text-align: center;}
+  
+  .LoginCard {
+    width: 300px;
   }
 }

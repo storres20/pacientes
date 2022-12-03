@@ -13,6 +13,10 @@
   width: auto;
 }
 
+.divTable {
+  width: 90vw;
+}
+
 /* Escritorio grande */
 @media only screen and (min-width: 768px){
   .input {
@@ -29,6 +33,7 @@
   .formFlex {
     width: 400px;
   }
+  
   
 }
 

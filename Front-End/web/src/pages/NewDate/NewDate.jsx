@@ -5,7 +5,7 @@ import {Link, useParams, useNavigate} from 'react-router-dom'
 
 import ProductDataService from "../../services/ProductService"
 
-import './Edit.scss'
+import './NewDate.scss'
 //import './Loading.scss'
 
 //import axios from 'axios'
@@ -19,16 +19,16 @@ import es from 'date-fns/locale/es';
 registerLocale('es', es)
 
 
-function Edit({logout}) {
+function NewDate({logout}) {
 
   const initialProductState = {
     id: null,
     nombre: "",
     dni: "",
-    fecha: "",
-    fecha2: "",
-    tipo: "",
-    categoria: ""
+    fechacita: "",
+    fechacita2: "",
+    hora: "",
+    categoria2: ""
   };
   
   const [loading, setLoading] = useState(false) // loading
@@ -63,17 +63,39 @@ function Edit({logout}) {
   };
   
   
-  const updateProduct = () => {
-    //console.log(currentProduct);
-    ProductDataService.update(currentProduct.id, currentProduct)
-      .then(response => {
-        //console.log(response.data);
-        /* setMessage("The Product was updated successfully!"); */
-        history("/home");
-      })
-      .catch(e => {
-        console.log(e);
-      });
+  const saveDate = () => {
+    if (currentProduct.nombre && currentProduct.dni && currentProduct.fechacita && currentProduct.fechacita2 && currentProduct.hora && currentProduct.categoria2) {
+    
+      var data = {
+        nombre: currentProduct.nombre,
+        dni: currentProduct.dni,
+        fechacita: currentProduct.fechacita,
+        fechacita2: currentProduct.fechacita2,
+        hora: currentProduct.hora,
+        categoria2: currentProduct.categoria2
+      };
+  
+      ProductDataService.createDate(data)
+        .then(response => {
+          setCurrentProduct({
+            id: response.data.id,
+            nombre: response.data.nombre,
+            dni: response.data.dni,
+            fechacita: response.data.fechacita,
+            fechacita2: response.data.fechacita2,
+            hora: response.data.hora,
+            categoria2: response.data.categoria2
+          });
+          //console.log(response.data);
+          history("/home");
+        })
+        .catch(e => {
+          console.log(e);
+        });
+        
+      }else {
+        alert("Faltan Datos")
+      }
   };
   
   
@@ -93,7 +115,7 @@ function Edit({logout}) {
       
       //console.log(b) // dd/MM/yyyy
       
-      setCurrentProduct({ ...currentProduct, 'fecha': startDate.valueOf(), 'fecha2': b });
+      setCurrentProduct({ ...currentProduct, 'fechacita': startDate.valueOf(), 'fechacita2': b });
     }
     
   };
@@ -125,20 +147,20 @@ function Edit({logout}) {
   
 
   return (
-    <div className='bgDiv2' style={{height: '100vh'}}>
+    <div className='bgDiv' style={{height: '100vh'}}>
       <NavBar logout={logout} />
       
       <div className="flex1">
-        <h1>Editar</h1>
+        <h1>Nueva Cita</h1>
         <h6>
-          Editar datos del paciente.
+          Registrar Nueva Cita del paciente.
         </h6>
         
         {loading ? (
           <div>
             
             <div className="edit-form">
-              <h4 className='mt-4'>Editar Paciente</h4>
+              <h4 className='mt-4'>Nueva Cita</h4>
               <form>
                 <div className="form-group mb-3">
                   <label htmlFor="nombre">Nombre</label>
@@ -150,6 +172,7 @@ function Edit({logout}) {
                     value={currentProduct.nombre}
                     onChange={handleInputChange}
                     autoComplete='off'
+                    disabled
                   />
                 </div>
                 
@@ -163,22 +186,23 @@ function Edit({logout}) {
                     value={currentProduct.dni}
                     onChange={handleInputChange}
                     autoComplete='off'
+                    disabled
                   />
                 </div>
                 
                 <div className="form-group mb-3">
-                  <label htmlFor="fecha">Fecha Nacimiento</label>
+                  <label htmlFor="fechacita">Fecha Cita</label>
                   <DatePicker
                     className="form-control input"
                     dateFormat="dd/MM/yyyy"
-                    selected={currentProduct.fecha}
+                    selected={currentProduct.fechacita}
                     
-                    id="fecha"
+                    id="fechacita"
                     required={true}
-                    value={currentProduct.fecha}
+                    value={currentProduct.fechacita}
                     onChange={date => handleOnChangeDate(date)}
                     onCalendarClose={handleInputChangeDate}
-                    name="fecha"
+                    name="fechacita"
                     autoComplete='off'
                     
                     peekNextMonth
@@ -187,11 +211,12 @@ function Edit({logout}) {
                     dropdownMode="select"
                     
                     locale="es"
+                    minDate={new Date()}
                   />
                 </div>
                 
                 <div className="form-group mb-3">
-                  <label htmlFor="tipo">Sexo</label>
+                  <label htmlFor="hora">Hora</label>
                   {/* <input
                     type="text"
                     className="form-control input"
@@ -201,28 +226,28 @@ function Edit({logout}) {
                     onChange={handleInputChange}
                   /> */}
                   <select className="form-select input" aria-label="Default select example"
-                    id="tipo"
+                    id="hora"
                     required={true}
-                    value={currentProduct.tipo}
+                    value={currentProduct.hora}
                     onChange={handleInputChange}
-                    name="tipo"
+                    name="hora"
                   >
-                    {/* <option>--Seleccionar--</option> */}
-                    <option value="masculino">masculino</option>
-                    <option value="femenino">femenino</option>
+                    <option>--Seleccionar--</option>
+                    <option value="09:00">09:00</option>
+                    <option value="10:00">10:00</option>
                   </select>
                 </div>
                 
                 <div className="form-group mb-3">
-                  <label htmlFor="categoria">Servicio / Especialidad</label>
+                  <label htmlFor="categoria2">Servicio / Especialidad</label>
                   <select className="form-select input" aria-label="Default select example"
-                    id="categoria"
+                    id="categoria2"
                     required={true}
-                    value={currentProduct.categoria}
+                    value={currentProduct.categoria2}
                     onChange={handleInputChange}
-                    name="categoria"
+                    name="categoria2"
                   >
-                    {/* <option>--Seleccionar--</option> */}
+                    <option>--Seleccionar--</option>
                     {
                       categorias.map(item => (
                         <option key={item.id} value={item.nombre}>{item.nombre}</option>
@@ -237,9 +262,9 @@ function Edit({logout}) {
               <button
                 type="submit"
                 className="btn btn-primary mt-3"
-                onClick={updateProduct}
+                onClick={saveDate}
               >
-                Actualizar
+                Registrar
               </button>
               
               <Link
@@ -263,4 +288,4 @@ function Edit({logout}) {
   )
 }
 
-export default Edit
+export default NewDate

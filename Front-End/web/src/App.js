@@ -6,8 +6,10 @@ import './Loading.scss'
 
 import Login from "./pages/Login/Login";
 import Home from "./pages/Home/Home"
-import About from './pages/About/About';
-import New from './pages/New/New'
+import Dates from './pages/Dates/Dates';
+//import New from './pages/New/New'
+//import NewDate from './pages/NewDate/NewDate'
+//import Resumen from './pages/Resumen/Resumen'
 
 import {Routes, Route, Navigate} from 'react-router-dom'
 import Edit from './pages/Edit/Edit';
@@ -39,9 +41,11 @@ function App() {
             {user && (
               <>
                 <Route path="/home" element={<Home logout={() => setUser(false)} />} />
-                <Route path="/about" element={<About logout={() => setUser(false)} />} />
-                <Route path="/new" element={<New logout={() => setUser(false)} />} />
+                <Route path="/dates" element={<Dates logout={() => setUser(false)} />} />
+                {/* <Route path="/new" element={<New logout={() => setUser(false)} />} /> */}
                 <Route path="/edit/:id" element={<Edit logout={() => setUser(false)} />} />
+                {/* <Route path="/newdate/:id" element={<NewDate logout={() => setUser(false)} />} /> */}
+                {/* <Route path="/resumen/dni/:id" element={<Resumen logout={() => setUser(false)} />} /> */}
               </>
             )}
             
