@@ -41,7 +41,7 @@ const login = data => {
 };
 
 const update = (id, data) => {
-  return http.put(`/products/${id}`, data);
+  return http.patch(`/products/${id}`, data);
 };
 
 const remove = id => {
