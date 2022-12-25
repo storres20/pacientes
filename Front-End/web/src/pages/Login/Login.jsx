@@ -13,6 +13,9 @@ import Card from 'react-bootstrap/Card';
 //import axios from 'axios'
 import {useNavigate} from 'react-router-dom'
 
+//import hash md5
+import md5 from 'blueimp-md5'
+
 
 function Login({authenticate}) {
 
@@ -32,9 +35,11 @@ function Login({authenticate}) {
     e.preventDefault()
     setLoading(false) // loading
     /* console.log(body) */
-    //axios.post('http://localhost:3001/login', body)
-    //axios.post('https://pacientes20-back.herokuapp.com/login', body)
-    ProductDataService.login(body)
+    
+    // destructuring "body"
+    const {username, password} = body
+    // hash md5 on "password"
+    ProductDataService.login({username, password: md5(password)})
     .then(({data}) => {
       //console.log(data.status);
       
@@ -49,7 +54,7 @@ function Login({authenticate}) {
     })
     .catch(({response})=>{
       //console.log(response.data);
-      alert(response.data)
+      alert(response.data.message)
       setLoading(true) // loading
     })
   }
