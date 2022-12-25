@@ -23,7 +23,7 @@ function ModalNew({show, closeShow, saveShow}) {
   // setting product
   
   const initialProductState = {
-    id: null,
+    _id: null,
     nombre: "",
     dni: "",
     fecha: "",
@@ -84,7 +84,7 @@ function ModalNew({show, closeShow, saveShow}) {
     ProductDataService.create(data)
       .then(response => {
         setProduct({
-          id: response.data.id,
+          _id: response.data._id,
           nombre: response.data.nombre,
           dni: response.data.dni,
           fecha: response.data.fecha,
@@ -246,7 +246,7 @@ function ModalNew({show, closeShow, saveShow}) {
                   <option>--Seleccionar--</option>
                   {
                     categorias.map(item => (
-                      <option key={item.id} value={item.nombre}>{item.nombre}</option>
+                      <option key={item._id} value={item.nombre}>{item.nombre}</option>
                     ))
                   }
                 </select>

@@ -284,7 +284,7 @@ function Home({ logout }) {
                       <option>--Todos--</option>
                       {
                         categorias.map(item => (
-                          <option key={item.id} value={item.nombre}>{item.nombre}</option>
+                          <option key={item._id} value={item.nombre}>{item.nombre}</option>
                         ))
                       }
                     </Form.Select>
@@ -321,7 +321,7 @@ function Home({ logout }) {
                   </thead>
                   <tbody>
                     {currentPosts.map((item, index) => (
-                      <tr key={item.id}>
+                      <tr key={item._id}>
                         <td className='text-center'>{index+1}</td>
                         <td>{item.nombre}</td>
                         <td className='text-center'>{item.dni}</td>
@@ -344,7 +344,7 @@ function Home({ logout }) {
                             </Button>
                             
                             <Button variant="danger"
-                            onClick={() => deleteProduct2(`${item.id}`)}
+                            onClick={() => deleteProduct2(`${item._id}`)}
                             title='borrar paciente'
                             >
                               <i className="bi bi-trash-fill"></i>

@@ -56,10 +56,12 @@ function ModalResumen({show, closeShow, list}) {
           
           setLoading(true) // loading
           //console.log(res)
-          if (res.length === 0) {
+          if (res.data.length === 0) {
             setNoData2(true) // no data
           }
-          else setNoData2(false)
+          else {
+            setNoData2(false)
+          }
           
         })
         .catch(e => {
@@ -253,7 +255,7 @@ function ModalResumen({show, closeShow, list}) {
                           <option>--Todos--</option>
                           {
                             categorias.map(item => (
-                              <option key={item.id} value={item.nombre}>{item.nombre}</option>
+                              <option key={item._id} value={item.nombre}>{item.nombre}</option>
                             ))
                           }
                         </Form.Select>
@@ -288,7 +290,7 @@ function ModalResumen({show, closeShow, list}) {
                         </thead>
                         <tbody>
                           {currentPosts.map((item, index) => (
-                            <tr key={item.id}>
+                            <tr key={item._id}>
                               <td className='text-center'>{index+1}</td>
                               <td>{item.nombre}</td>
                               <td className='text-center'>{item.dni}</td>
@@ -297,7 +299,7 @@ function ModalResumen({show, closeShow, list}) {
                               <td className='text-center'>{item.categoria2}</td>
                               <td className='text-center'>
                                 <div className='d-flex flex-row align-items-baseline justify-content-center'>
-                                  <Link to={"#"} title='nueva cita' className='btn btn-primary'>
+                                  {/* <Link to={"#"} title='nueva cita' className='btn btn-primary'>
                                     <i className="bi bi-plus-circle-fill"></i>
                                   </Link>
                                   <Link
@@ -311,7 +313,7 @@ function ModalResumen({show, closeShow, list}) {
                                   title='borrar cita'
                                   >
                                     <i className="bi bi-trash-fill"></i>
-                                  </button>
+                                  </button> */}
                                 </div>
                               </td>
                             </tr>

@@ -25,7 +25,7 @@ function ModalEdit({show, closeShow, saveShow, list}) {
   // setting currentProduct
   
   const initialProductState = {
-    id: null,
+    _id: null,
     nombre: "",
     dni: "",
     fecha: "",
@@ -77,7 +77,7 @@ function ModalEdit({show, closeShow, saveShow, list}) {
   
   useEffect(() => {
     if (list !== false) {
-      getProduct(list.id);
+      getProduct(list._id);
     }
   }, [list]);
   
@@ -139,7 +139,7 @@ function ModalEdit({show, closeShow, saveShow, list}) {
   // Registrar button
   const updateProduct = () => {
     //console.log(currentProduct);
-    ProductDataService.update(currentProduct.id, currentProduct)
+    ProductDataService.update(currentProduct._id, currentProduct)
       .then(response => {
         //console.log(response.data);
         /* setMessage("The Product was updated successfully!"); */
@@ -253,7 +253,7 @@ function ModalEdit({show, closeShow, saveShow, list}) {
                     {/* <option>--Seleccionar--</option> */}
                     {
                       categorias.map(item => (
-                        <option key={item.id} value={item.nombre}>{item.nombre}</option>
+                        <option key={item._id} value={item.nombre}>{item.nombre}</option>
                       ))
                     }
                   </select>
