@@ -28,16 +28,23 @@ function Login({authenticate}) {
     })
   }
   
-  const onSubmit = () => {
+  const onSubmit = (e) => {
+    e.preventDefault()
     setLoading(false) // loading
     /* console.log(body) */
     //axios.post('http://localhost:3001/login', body)
     //axios.post('https://pacientes20-back.herokuapp.com/login', body)
     ProductDataService.login(body)
     .then(({data}) => {
-      //console.log(data);
-      authenticate()
-      navigate('/home');
+      //console.log(data.status);
+      
+      if (data.status === 1) {
+        authenticate()
+        navigate('/home');
+      } else {
+        alert(data.message)
+        setLoading(true) // loading
+      }
       
     })
     .catch(({response})=>{
@@ -58,18 +65,18 @@ function Login({authenticate}) {
           <Card className="LoginCard mt-5">
             <Card.Body>
               
-                <Form>
+                <Form onSubmit={onSubmit}>
                   <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label className="FormLabel">Nombre</Form.Label>
-                    <Form.Control type="text" placeholder="Enter: mario" value={body.username} onChange={inputChange} name="username" />
+                    <Form.Control type="text" placeholder="Enter: mario" value={body.username} onChange={inputChange} name="username" required autoComplete='off' />
                   </Form.Group>
             
                   <Form.Group className="mb-5" controlId="formBasicPassword">
                     <Form.Label className="FormLabel">Contraseña</Form.Label>
-                    <Form.Control type="password" placeholder="Enter: mario123" value={body.password} onChange={inputChange} name="password" />
+                    <Form.Control type="password" placeholder="Enter: mario123" value={body.password} onChange={inputChange} name="password" required />
                   </Form.Group>
                   
-                  <Button variant="danger" onClick={onSubmit} >
+                  <Button variant="danger" type='submit' >
                     Login
                   </Button>
                 </Form>
