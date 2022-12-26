@@ -63,11 +63,14 @@
 
 ### Key Features <a name="key-features"></a>
 
-- **[React js]**
-- **[Components]**
-- **[CSS]**
-- **[React Bootstrap]**
-- **[REDUX]**
+- **[Book medical appointments for patients]**
+- **[Create new patient]**
+- **[Edit patient info]**
+- **[Delete patient info]**
+- **[Edit appointment info]**
+- **[Delete appointment info]**
+- **[Show patient's list]**
+- **[Show appointment's list per patient]**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -158,11 +161,9 @@ You can deploy this project using:
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- [ ] **[Class and function components]**
-- [ ] **[React js]**
-- [ ] **[Redux]**
-- [ ] **[React Boostrap]**
-- [ ] **[Linters]**
+- [ ] **[Edit appointment info]**
+- [ ] **[Book new appointment from Dates pages]**
+- [ ] **[Book new appointment from Modal Resumen Dates]**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
