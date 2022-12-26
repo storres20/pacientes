@@ -240,11 +240,6 @@ function Home({ logout }) {
       <Card className='bgDiv'>
         <Card.Body>
           <Card.Title><h1>Bienvenido</h1></Card.Title>
-          <Card.Text>
-          Este sistema le permite visualizar el listado de pacientes
-          </Card.Text>
-
-          <Card.Title>Listado:</Card.Title>
           
           <InputGroup className="mt-3 mb-3">
             <InputGroup.Text id="basic-addon1">Total de pacientes:</InputGroup.Text>
