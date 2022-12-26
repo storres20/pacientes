@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { useSelector } from 'react-redux';
 //import axios from 'axios'
 import NavBar from '../../components/NavBar/NavBar'
 import Pagina from '../../components/Pagina/Pagina'
@@ -27,13 +28,14 @@ import ModalResumen from '../../components/ModalResumen/ModalResumen'
 
 
 function Home({ logout }) {
+  /* Redux */
+  const categorias = useSelector((state) => state.categories);
   
   // ********************************************
   // useState
   
   const [rutas, setRutas] = useState([]);
   const [allData, setAllData] = useState([]);
-  const [categorias, setCategorias] = useState([]); // list category
   const [loading, setLoading] = useState(false) // loading
   const [noData, setNoData] = useState(false)  // noData
   
@@ -60,18 +62,9 @@ function Home({ logout }) {
       })
   }
 
-  const obtenerCategorias = () => {
-    // GET request for remote image in node.js
-    ProductDataService.getAll2()
-      .then(res => {
-        //console.log(res.data);
-        setCategorias(res.data)
-      })
-  }
 
   useEffect(() => {
     obtenerDatos();
-    obtenerCategorias();
   }, [])
 
 

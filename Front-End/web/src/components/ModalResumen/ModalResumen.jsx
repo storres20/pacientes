@@ -1,4 +1,5 @@
 import React, {useState, useEffect, useRef} from 'react'
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
 
 import ProductDataService from "../../services/ProductService";
@@ -19,6 +20,8 @@ import Col from 'react-bootstrap/Col';
 
 
 function ModalResumen({show, closeShow, list}) {
+  /* Redux */
+  const categorias = useSelector((state) => state.categories);
   
   //console.log(list)
   
@@ -27,7 +30,6 @@ function ModalResumen({show, closeShow, list}) {
   
   const [rutas, setRutas] = useState([]);
   const [allData, setAllData] = useState([]);
-  const [categorias, setCategorias] = useState([]); // list category
   const [loading, setLoading] = useState(false) // loading
   const [noData, setNoData] = useState(false)  // noData - filter's result
   const [noData2, setNoData2] = useState(false)  // noData2 - database's result
@@ -80,24 +82,11 @@ function ModalResumen({show, closeShow, list}) {
       
   }
 
-  
-  // *******************************
-  // Categories
-  
-  const obtenerCategorias = () => {
-    // GET request for remote image in node.js
-    ProductDataService.getAll2()
-      .then(res => {
-        //console.log(res.data);
-        setCategorias(res.data)
-      })
-  }
 
   useEffect(() => {
     if (list !== false) {
       obtenerDatos(list);
     }
-    obtenerCategorias();
   }, [list])
 
   

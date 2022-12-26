@@ -1,4 +1,5 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
+import { useSelector } from 'react-redux';
 
 import ProductDataService from "../../services/ProductService";
 
@@ -18,6 +19,8 @@ registerLocale('es', es)
 
 
 function ModalNew({show, closeShow, saveShow}) {
+  /* Redux */
+  const categorias = useSelector((state) => state.categories);
   
   // ********************************
   // setting product
@@ -35,24 +38,6 @@ function ModalNew({show, closeShow, saveShow}) {
   const [product, setProduct] = useState(initialProductState);
   
   
-  // ****************************
-  // Categories
-  const [categorias, setCategorias] = useState([]); // list category
-  
-  // servicio / especialidad modal list
-  const obtenerCategorias = () => {
-    // GET request for remote image in node.js
-    ProductDataService.getAll2()
-      .then(res => {
-        //console.log(res.data);
-        setCategorias(res.data)
-      })
-  }
-  
-  useEffect(() => {
-    obtenerCategorias();
-  }, [])
-
   // ****************************
   // Modal - Nuevo paciente
   

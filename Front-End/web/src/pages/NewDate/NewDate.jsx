@@ -1,4 +1,6 @@
 import React, {useState, useEffect} from 'react'
+import { useSelector } from 'react-redux';
+
 import NavBar from '../../components/NavBar/NavBar'
 
 import {Link, useParams, useNavigate} from 'react-router-dom'
@@ -20,6 +22,8 @@ registerLocale('es', es)
 
 
 function NewDate({logout}) {
+  /* Redux */
+  const categorias = useSelector((state) => state.categories);
 
   const initialProductState = {
     id: null,
@@ -127,25 +131,6 @@ function NewDate({logout}) {
   }
   
   
-  // Category
-  const [categorias, setCategorias] = useState([]); // list category
-  
-  const obtenerCategorias = () => {
-    // GET request for remote image in node.js
-    //axios.get('http://localhost:3001/api/categories')
-    //axios.get('https://pacientes20-back.herokuapp.com/api/categories')
-    ProductDataService.getAll2()
-      .then(res => {
-        //console.log(res.data);
-        setCategorias(res.data)
-      })
-  }
-
-  useEffect(() => {
-    obtenerCategorias();
-  }, [])
-  
-
   return (
     <div className='bgDiv' style={{height: '100vh'}}>
       <NavBar logout={logout} />

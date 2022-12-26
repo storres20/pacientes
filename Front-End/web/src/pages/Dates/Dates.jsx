@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { useSelector } from 'react-redux';
 //import axios from 'axios'
 import NavBar from '../../components/NavBar/NavBar'
 import Pagina from '../../components/Pagina/Pagina'
@@ -30,10 +31,11 @@ registerLocale('es', es)
 
 
 function Dates({ logout }) {
+  /* Redux */
+  const categorias = useSelector((state) => state.categories);
 
   const [rutas, setRutas] = useState([]);
   const [allData, setAllData] = useState([]);
-  const [categorias, setCategorias] = useState([]); // list category
   const [loading, setLoading] = useState(false) // loading
   const [noData, setNoData] = useState(false)  // noData
   const [startDate, setStartDate] = useState(null);
@@ -83,18 +85,9 @@ function Dates({ logout }) {
       
   }
 
-  const obtenerCategorias = () => {
-    // GET request for remote image in node.js
-    ProductDataService.getAll2()
-      .then(res => {
-        //console.log(res.data);
-        setCategorias(res.data)
-      })
-  }
 
   useEffect(() => {
     obtenerDatos(startDate);
-    obtenerCategorias();
   }, [startDate])
 
 

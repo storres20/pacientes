@@ -1,4 +1,6 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
+import { useSelector } from 'react-redux';
+
 import NavBar from '../../components/NavBar/NavBar'
 
 import ProductDataService from "../../services/ProductService";
@@ -16,6 +18,8 @@ registerLocale('es', es)
 
 
 function New({logout}) {
+  /* Redux */
+  const categorias = useSelector((state) => state.categories);
 
   const initialProductState = {
     id: null,
@@ -73,21 +77,6 @@ function New({logout}) {
     }
   };
   
-  // Category
-  const [categorias, setCategorias] = useState([]); // list category
-  
-  const obtenerCategorias = () => {
-    // GET request for remote image in node.js
-    ProductDataService.getAll2()
-      .then(res => {
-        //console.log(res.data);
-        setCategorias(res.data)
-      })
-  }
-
-  useEffect(() => {
-    obtenerCategorias();
-  }, [])
   
   // Datepicker
   //const a = new Date()

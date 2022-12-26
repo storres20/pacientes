@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import { useSelector } from 'react-redux';
 
 import ProductDataService from "../../services/ProductService";
 
@@ -18,6 +19,8 @@ registerLocale('es', es)
 
 
 function ModalEdit({show, closeShow, saveShow, list}) {
+  /* Redux */
+  const categorias = useSelector((state) => state.categories);
   
   //console.log(list)
   
@@ -37,25 +40,6 @@ function ModalEdit({show, closeShow, saveShow, list}) {
   
   const [currentProduct, setCurrentProduct] = useState(initialProductState);
   const [loading, setLoading] = useState(false) // loading
-  
-  
-  // ****************************
-  // Categories
-  const [categorias, setCategorias] = useState([]); // list category
-  
-  // servicio / especialidad modal list
-  const obtenerCategorias = () => {
-    // GET request for remote image in node.js
-    ProductDataService.getAll2()
-      .then(res => {
-        //console.log(res.data);
-        setCategorias(res.data)
-      })
-  }
-  
-  useEffect(() => {
-    obtenerCategorias();
-  }, [])
   
   
   // *****************************
