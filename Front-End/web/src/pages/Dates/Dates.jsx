@@ -204,12 +204,7 @@ function Dates({ logout }) {
       <Card className='bgDiv'>
         <Card.Body>
           <Card.Title><h1>Citas</h1></Card.Title>
-          <Card.Text>
-          Esta página le permite visualizar los <b>pacientes citados</b> según la <b>fecha del calendario</b>
-          </Card.Text>
 
-          <Card.Title>Listado:</Card.Title>
-          
           <InputGroup className="mt-3 mb-3">
             <InputGroup.Text id="basic-addon1">Fecha de Cita:</InputGroup.Text>
             <DatePicker
