@@ -43,27 +43,12 @@ function ModalEdit({show, closeShow, saveShow, list}) {
   
   
   // *****************************
-  // get patient's data
-  
-  const getProduct = x => {
-    ProductDataService.get(x)
-      .then(response => {
-        setCurrentProduct(response.data);
-        //console.log(response.data);
-        setLoading(true) // loading
-      })
-      .catch(e => {
-        console.log(e);
-        setLoading(true) // loading
-      });
-  };
-  
+  // Patient's data
   
   useEffect(() => {
-    if (list !== false) {
-      getProduct(list._id);
-    }
-  }, [list]);
+    setCurrentProduct(list)
+    setLoading(true) // loading
+  }, [list])
   
   
   // ****************************
