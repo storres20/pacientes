@@ -292,9 +292,9 @@ function ModalResumen({show, closeShow, list}) {
                               <td className='text-center'>{item.categoria2}</td>
                               <td className='text-center'>
                                 <div className='d-flex flex-row align-items-baseline justify-content-center'>
-                                  <Link to={"#"} title='nueva cita' className='btn btn-primary'>
+                                  {/* <Link to={"#"} title='nueva cita' className='btn btn-primary'>
                                     <i className="bi bi-plus-circle-fill"></i>
-                                  </Link>
+                                  </Link> */}
                                   <Link
                                     className='btn btn-warning m-1'
                                     to={"#"}

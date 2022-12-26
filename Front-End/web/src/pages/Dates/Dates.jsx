@@ -306,7 +306,7 @@ function Dates({ logout }) {
                         <td className='text-center'>{item.categoria2}</td>
                         <td className='text-center'>
                           <div className='d-flex flex-row align-items-baseline justify-content-center'>
-                            <Link to={"#"} title='nueva cita' className='btn btn-primary m-1'>
+                            {/* <Link to={"#"} title='nueva cita' className='btn btn-primary m-1'>
                               <i className="bi bi-plus-circle-fill"></i>
                             </Link>
                             <Link to={"#"} title='resumen cita' className='btn btn-success'>
@@ -323,7 +323,7 @@ function Dates({ logout }) {
                             title='borrar paciente'
                             >
                               <i className="bi bi-trash-fill"></i>
-                            </button>
+                            </button> */}
                           </div>
                         </td>
                       </tr>
