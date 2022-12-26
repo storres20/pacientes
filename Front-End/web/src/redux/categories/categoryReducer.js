@@ -3,8 +3,8 @@
 // categoryReducer.js
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-const baseURL = "http://localhost:3001/api"; //localhost
-//const baseURL = "https://pacientesmongo-back.vercel.app/api";
+//const baseURL = "http://localhost:3001/api"; //localhost
+const baseURL = "https://pacientesmongo-back.vercel.app/api";
 
 // Actions... types
 const GET_CATEGORIES = 'spaceTravelHub/categories/GET_CATEGORIES';
