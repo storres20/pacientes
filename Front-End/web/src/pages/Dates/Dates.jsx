@@ -64,7 +64,7 @@ function Dates({ logout }) {
           
           setLoading(true) // loading
           //console.log(res)
-          if (res.length === 0) {
+          if (res.data.length === 0) {
             setNoData(true) // no data
           }
           else setNoData(false)
@@ -113,8 +113,13 @@ function Dates({ logout }) {
     } else {
       setRutas(allData);
       setCurrentPage(1)
-      setNoData(false) // no data
-      // If the text field is empty, show all users
+      
+      // If the text field is empty
+      if (allData.length === 0) {
+        setNoData(true)
+      } else {
+        setNoData(false)
+      }
     }
 
   }
@@ -142,8 +147,13 @@ function Dates({ logout }) {
     } else {
       setRutas(allData);
       setCurrentPage(1)
-      setNoData(false) // no data
-      // If the text field is empty, show all users
+      
+      // If the text field is empty
+      if (allData.length === 0) {
+        setNoData(true)
+      } else {
+        setNoData(false)
+      }
     }
 
   }
@@ -252,7 +262,7 @@ function Dates({ logout }) {
                       <option>--Todos--</option>
                       {
                         categorias.map(item => (
-                          <option key={item.id} value={item.nombre}>{item.nombre}</option>
+                          <option key={item._id} value={item.nombre}>{item.nombre}</option>
                         ))
                       }
                     </Form.Select>
@@ -287,7 +297,7 @@ function Dates({ logout }) {
                   </thead>
                   <tbody>
                     {currentPosts.map((item, index) => (
-                      <tr key={item.id}>
+                      <tr key={item._id}>
                         <td className='text-center'>{index+1}</td>
                         <td>{item.nombre}</td>
                         <td className='text-center'>{item.dni}</td>
