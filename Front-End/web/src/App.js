@@ -1,4 +1,6 @@
 import React, {useState, useEffect} from 'react';
+import { useDispatch } from 'react-redux';
+import { getCategories } from './redux/categories/categoryReducer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "bootstrap-icons/font/bootstrap-icons.css";
 
@@ -16,6 +18,14 @@ import Edit from './pages/Edit/Edit';
 import Footer from './components/Footer/Footer';
 
 function App() {
+  /* Redux */
+  const dispatch = useDispatch();
+  
+  useEffect(() => {
+    dispatch(getCategories());
+  }, [dispatch]);
+
+  /* LocalStorage - Login */
   const storedUser = JSON.parse(localStorage.getItem("user")) || false;
 
   const [user, setUser] = useState(storedUser)
