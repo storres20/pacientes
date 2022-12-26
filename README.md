@@ -14,7 +14,7 @@
 # 📗 Table of Contents
 
 - [📗 Table of Contents](#-table-of-contents)
-- [📖 \[Movies Project\] ](#-movies-project-)
+- [📖 \[Pacientes Project\] ](#-pacientes-project-)
   - [🛠 Built With ](#-built-with-)
     - [Tech Stack ](#tech-stack-)
     - [Key Features ](#key-features-)
@@ -36,12 +36,11 @@
 
 <!-- PROJECT DESCRIPTION -->
 
-# 📖 [Movies Project] <a name="about-project"></a>
+# 📖 [Pacientes Project] <a name="about-project"></a>
 
-> This is a web application for shows the most recent Movies.
-> The application will allow users to see details like title, author, description.
+> 🛍 🛒 Pacientes 🛍 🛒 is a web application that lets you register new patiens, save information and book appointments. 🛒🛒🛒 It could be use by Health Centers, Hospitals, etc
 
-**[Movies Project]** is web application.
+**[Pacientes Project]** is web application.
 
 ## 🛠 Built With <a name="built-with"></a>
 
@@ -58,9 +57,6 @@
   <ul>
     <li><a href="https://react-bootstrap.github.io/">React Bootstrap</a></li>
   </ul>
-  <ul>
-    <li><a href="https://jestjs.io/">Jest - Testing</a></li>
-  </ul>
 </details>
 
 <!-- Features -->
@@ -72,7 +68,6 @@
 - **[CSS]**
 - **[React Bootstrap]**
 - **[REDUX]**
-- **[Jest - Testing]**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -80,7 +75,7 @@
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
-- [Live Demo Link](https://moviesx7.netlify.app/)
+- [Live Demo Link](https://pacientes20.netlify.app/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -105,7 +100,7 @@ Clone this repository to your desired folder:
 
 ```sh
   cd my-folder
-  git clone https://github.com/storres20/movies-react
+  git clone https://github.com/storres20/pacientes.git
 ```
 
 ### Install
@@ -113,7 +108,7 @@ Clone this repository to your desired folder:
 Install this project with:
 
 ```sh
-  cd movies-react
+  cd pacientes
   npm install
 ```
 
@@ -167,7 +162,6 @@ You can deploy this project using:
 - [ ] **[React js]**
 - [ ] **[Redux]**
 - [ ] **[React Boostrap]**
-- [ ] **[Jest - Testing]**
 - [ ] **[Linters]**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -178,7 +172,7 @@ You can deploy this project using:
 
 Contributions, issues, and feature requests are welcome!
 
-Feel free to check the [issues page](https://github.com/storres20/movies-react/issues).
+Feel free to check the [issues page](https://github.com/storres20/pacientes/issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
