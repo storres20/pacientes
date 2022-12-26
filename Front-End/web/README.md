@@ -30,3 +30,6 @@ Nota: Para deploy frontend y backend en el mismo repositorio
 
 Backend - Heroku
 https://github.com/timanovsky/subdir-heroku-buildpack
+
+# Encryp
+https://www.md5hashgenerator.com/
