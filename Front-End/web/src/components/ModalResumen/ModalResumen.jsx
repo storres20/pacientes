@@ -47,6 +47,8 @@ function ModalResumen({show, closeShow, list}) {
 
   const obtenerDatos = (x) => {
     
+    setLoading(false) // loading
+    
     if (x.dni !== null) {
     
       // GET request for remote image in node.js 111222333
