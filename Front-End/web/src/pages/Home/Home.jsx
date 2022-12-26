@@ -241,7 +241,7 @@ function Home({ logout }) {
   
 
   return (
-    <div style={{height: '100vh'}}  className='bgDiv'>
+    <div className='bgDiv'>
       <NavBar logout={logout} />
 
       <Card className='bgDiv'>
