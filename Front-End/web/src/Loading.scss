@@ -4,6 +4,16 @@
   web: https://loading.io/css/
 */
 
+.appDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  
+  background: rgb(238,174,202);
+  background: linear-gradient(90deg, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+}
+
 .lds-ring {
   display: inline-block;
   position: relative;
