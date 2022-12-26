@@ -13,6 +13,7 @@ import Dates from './pages/Dates/Dates';
 
 import {Routes, Route, Navigate} from 'react-router-dom'
 import Edit from './pages/Edit/Edit';
+import Footer from './components/Footer/Footer';
 
 function App() {
   const storedUser = JSON.parse(localStorage.getItem("user")) || false;
@@ -31,27 +32,28 @@ function App() {
 
 
   return (
-    <div>
+    <div className='appDiv'>
       <main>
-          <Routes>
-            {!user && (
-              <Route path="/" element={<Login authenticate={() => setUser(true)} />} />
-            )}
-            
-            {user && (
-              <>
-                <Route path="/home" element={<Home logout={() => setUser(false)} />} />
-                <Route path="/dates" element={<Dates logout={() => setUser(false)} />} />
-                {/* <Route path="/new" element={<New logout={() => setUser(false)} />} /> */}
-                <Route path="/edit/:id" element={<Edit logout={() => setUser(false)} />} />
-                {/* <Route path="/newdate/:id" element={<NewDate logout={() => setUser(false)} />} /> */}
-                {/* <Route path="/resumen/dni/:id" element={<Resumen logout={() => setUser(false)} />} /> */}
-              </>
-            )}
-            
-            <Route path="/*" element={<Navigate to={user ? "/home" : "/"} />} />
-          </Routes>
-        </main>
+        <Routes>
+          {!user && (
+            <Route path="/" element={<Login authenticate={() => setUser(true)} />} />
+          )}
+          
+          {user && (
+            <>
+              <Route path="/home" element={<Home logout={() => setUser(false)} />} />
+              <Route path="/dates" element={<Dates logout={() => setUser(false)} />} />
+              {/* <Route path="/new" element={<New logout={() => setUser(false)} />} /> */}
+              <Route path="/edit/:id" element={<Edit logout={() => setUser(false)} />} />
+              {/* <Route path="/newdate/:id" element={<NewDate logout={() => setUser(false)} />} /> */}
+              {/* <Route path="/resumen/dni/:id" element={<Resumen logout={() => setUser(false)} />} /> */}
+            </>
+          )}
+          
+          <Route path="/*" element={<Navigate to={user ? "/home" : "/"} />} />
+        </Routes>
+      </main>
+      <Footer/>
     </div>
   );
 }
