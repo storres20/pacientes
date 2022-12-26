@@ -50,7 +50,9 @@ function ModalResumen({show, closeShow, list}) {
     setLoading(false) // loading
     
     if (x.dni !== null) {
-    
+      
+      setLoading(false) // loading
+      
       // GET request for remote image in node.js 111222333
       ProductDataService.getDateDNI(x.dni)
         .then(res => {
@@ -179,7 +181,7 @@ function ModalResumen({show, closeShow, list}) {
       .then(response => {
         //console.log(response.data);
         //window.location.reload(true);
-        //obtenerDatos(params)
+        obtenerDatos(list)
       })
       .catch(e => {
         console.log(e);
@@ -290,7 +292,7 @@ function ModalResumen({show, closeShow, list}) {
                               <td className='text-center'>{item.categoria2}</td>
                               <td className='text-center'>
                                 <div className='d-flex flex-row align-items-baseline justify-content-center'>
-                                  {/* <Link to={"#"} title='nueva cita' className='btn btn-primary'>
+                                  <Link to={"#"} title='nueva cita' className='btn btn-primary'>
                                     <i className="bi bi-plus-circle-fill"></i>
                                   </Link>
                                   <Link
@@ -300,11 +302,12 @@ function ModalResumen({show, closeShow, list}) {
                                   >
                                     <i className="bi bi-pencil-fill"></i>
                                   </Link>
-                                  <button className="btn btn-danger"
+                                  <Button variant="danger"
+                                  onClick={() => deleteProduct2(`${item._id}`)}
                                   title='borrar cita'
                                   >
                                     <i className="bi bi-trash-fill"></i>
-                                  </button> */}
+                                  </Button>
                                 </div>
                               </td>
                             </tr>
