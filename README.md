@@ -4,7 +4,9 @@
   <h1><b>Pacientes Project</b></h1>
   <br/>
 
-  ![image](https://user-images.githubusercontent.com/81504385/184515974-91438e6c-21ba-45d3-92cd-5b79fa3916ee.png)
+  ![Pacientes (1)](https://user-images.githubusercontent.com/81504385/211724230-0ff13ba1-1d47-4ace-9d57-648326f2a31e.png)
+  
+  ![Pacientes](https://user-images.githubusercontent.com/81504385/211724303-90c549fa-eeab-474e-8f12-6288b94433de.png)
 
 
 </div>
