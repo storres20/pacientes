@@ -27,7 +27,8 @@ export default function reducer(state = [], action) {
         }
         return { ...mission, reserved: true };
       });
-      return newState; }
+      return newState;
+    }
     default: return state;
   }
 }
